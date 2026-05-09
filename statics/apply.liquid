@@ -1,0 +1,175 @@
+{%- assign index_page = site.pages['/'] -%}
+
+<main
+  class="flex min-h-[calc(100vh-80px)] py-12"
+  x-data="{
+    formData: {
+      company_name: '',
+      contact_email: '',
+      position: '',
+      role: 'Programming',
+      commitment: 'Full-time',
+      description: '',
+      salary: '',
+      addon_sticky: false,
+      addon_highlight: false
+    },
+    errors: {},
+    isSubmitting: false,
+    submitForm() {
+      this.errors = {}
+      this.isSubmitting = true
+
+      if (!this.formData.company_name) this.errors.company_name = 'Company name is required.'
+      if (!this.formData.contact_email) this.errors.contact_email = 'Email is required.'
+      else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(this.formData.contact_email)) this.errors.contact_email = 'Email is invalid.'
+      if (!this.formData.position) this.errors.position = 'Position name is required.'
+      if (!this.formData.description) this.errors.description = 'Job description is required.'
+
+      if (Object.keys(this.errors).length > 0) {
+        this.isSubmitting = false
+        return
+      }
+
+      let lines = []
+      lines.push('【Jobs Apply】')
+      if (this.formData.company_name) lines.push('Company: ' + this.formData.company_name)
+      if (this.formData.contact_email) lines.push('Email: ' + this.formData.contact_email)
+      if (this.formData.position) lines.push('Position: ' + this.formData.position)
+      if (this.formData.role) lines.push('Role: ' + this.formData.role)
+      if (this.formData.commitment) lines.push('Commitment: ' + this.formData.commitment)
+      if (this.formData.salary) lines.push('Salary: ' + this.formData.salary)
+      if (this.formData.addon_sticky) lines.push('Add-on: Stick post (+$79)')
+      if (this.formData.addon_highlight) lines.push('Add-on: Highlight post (+$39)')
+      if (this.formData.description) lines.push('Description:\\n' + this.formData.description)
+
+      $refs.messageInput.value = lines.join('\\n')
+      $refs.submitBtn.click()
+
+      this.formData = {
+        company_name: '',
+        contact_email: '',
+        position: '',
+        role: 'Programming',
+        commitment: 'Full-time',
+        description: '',
+        salary: '',
+        addon_sticky: false,
+        addon_highlight: false
+      }
+      this.isSubmitting = false
+    }
+  }"
+>
+  <div class="w-full">
+    <div class="mx-auto max-w-md px-6">
+      <div class="mb-10">
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 mb-2">Apply now</h1>
+        <div class="text-slate-600">UI 复刻 Cruip JobBoard 的 post-a-job（暂不接提交逻辑）。</div>
+      </div>
+
+      {% form_tag 'feedback', page: index_page %}
+        <input value="/s/apply" autocomplete="off" type="hidden" name="feedback[page_path]">
+        <input type="hidden" name="feedback[message]" x-ref="messageInput">
+        <input type="hidden" name="feedback[useful_type]" value="💼">
+        <button type="submit" x-ref="submitBtn" style="display: none;"></button>
+
+        <form class="card p-6 space-y-6" @submit.prevent="submitForm">
+        <div>
+          <div class="text-base font-extrabold text-slate-900 mb-3"><span class="text-brand-teal">1.</span> Your company</div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="company_name">Company Name</label>
+              <input id="company_name" class="form-input" type="text" x-model="formData.company_name" placeholder="E.g., Acme Inc." />
+              <p x-show="errors.company_name" x-text="errors.company_name" class="mt-1 text-xs text-red-600"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="contact_email">Contact Email</label>
+              <input id="contact_email" class="form-input" type="email" x-model="formData.contact_email" placeholder="name@company.com" />
+              <p x-show="errors.contact_email" x-text="errors.contact_email" class="mt-1 text-xs text-red-600"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="company_logo">Company Logo (optional)</label>
+              <input id="company_logo" type="file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-teal file:text-white hover:file:brightness-95 transition cursor-pointer" />
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-200 pt-6">
+          <div class="text-base font-extrabold text-slate-900 mb-3"><span class="text-brand-teal">2.</span> The role</div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="position">Position Name</label>
+              <input id="position" class="form-input" type="text" x-model="formData.position" placeholder="E.g., Senior Software Engineer" />
+              <p x-show="errors.position" x-text="errors.position" class="mt-1 text-xs text-red-600"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="role">Role</label>
+              <select id="role" class="form-select" x-model="formData.role">
+                <option>Programming</option>
+                <option>Design</option>
+                <option>Management / Finance</option>
+                <option>Customer Support</option>
+                <option>Sales / Marketing</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="commitment">Commitment</label>
+              <select id="commitment" class="form-select" x-model="formData.commitment">
+                <option>Full-time</option>
+                <option>Part-time</option>
+                <option>Internship</option>
+                <option>Contract / Freelance</option>
+                <option>Co-founder</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="description">Job Description</label>
+              <textarea id="description" class="form-textarea" rows="4" x-model="formData.description"></textarea>
+              <p x-show="errors.description" x-text="errors.description" class="mt-1 text-xs text-red-600"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1" for="salary">Salary (optional)</label>
+              <input id="salary" class="form-input" type="text" x-model="formData.salary" placeholder="E.g., $100,000 - $170,000 USD" />
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-200 pt-6">
+          <div class="text-base font-extrabold text-slate-900 mb-3"><span class="text-brand-teal">3.</span> Select add-ons and pay</div>
+          <div class="space-y-3 text-sm text-slate-600">
+            <label class="card p-4 cursor-pointer flex items-start gap-3">
+              <input type="checkbox" class="mt-1" x-model="formData.addon_sticky" />
+              <div>
+                <div class="font-semibold text-slate-900">Stick your post to stay on top (+$79)</div>
+                <div class="text-slate-500">4x more views</div>
+              </div>
+            </label>
+            <label class="card p-4 cursor-pointer flex items-start gap-3">
+              <input type="checkbox" class="mt-1" x-model="formData.addon_highlight" />
+              <div>
+                <div class="font-semibold text-slate-900">Highlight your post (+$39)</div>
+                <div class="text-slate-500">Get noticed faster</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button
+            type="button"
+            class="btn btn-secondary w-full"
+            @click="submitForm"
+            :disabled="isSubmitting"
+          >
+            <span x-show="!isSubmitting">Submit</span>
+            <span x-show="isSubmitting">Submitting...</span>
+          </button>
+          <p class="mt-3 text-xs text-slate-500 text-center">后续会接入 Baklib 表单与投递流程。</p>
+        </div>
+        </form>
+      {% endform_tag %}
+    </div>
+  </div>
+</main>
+

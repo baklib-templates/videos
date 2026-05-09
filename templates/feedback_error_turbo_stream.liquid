@@ -1,0 +1,12 @@
+{% layout none %}
+
+<turbo-stream action="append" target="js--body">
+  <template>
+    <div class="fixed left-1/2 bottom-6 z-50 -translate-x-1/2" id="js--jobs-feedback-error" x-data="" x-init="setTimeout(() => { $el.remove() }, 5000)">
+      <div class="card px-4 py-3 text-sm text-red-700 border-red-200">
+        <span class="font-semibold">{{ errors | default: 'Submit failed' }}</span>
+      </div>
+    </div>
+  </template>
+</turbo-stream>
+

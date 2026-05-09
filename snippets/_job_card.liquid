@@ -1,0 +1,49 @@
+{%- assign job_title = job.ext_info.title | default: job.link_text -%}
+{%- assign company_name = job.ext_info.company_name | default: job.settings.company_name -%}
+{%- assign location = job.ext_info.location | default: job.settings.location -%}
+{%- assign salary = job.ext_info.salary | default: job.settings.salary -%}
+{%- assign employment_type = job.ext_info.employment_type | default: job.settings.employment_type -%}
+{%- assign posted_at = job.ext_info.date_posted | default: job.published_at | default: job.created_at -%}
+
+<article class="p-5 hover:bg-slate-50/60 transition">
+  <div class="sm:flex items-start justify-between gap-6">
+    <div class="flex items-start gap-4 min-w-0">
+      <div class="min-w-0">
+        <h3 class="text-base font-extrabold text-slate-900 leading-snug">
+          <a href="{{ job.path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance" class="hover:underline">
+            {{ job_title }}
+          </a>
+        </h3>
+        <div class="mt-1 text-sm text-slate-500 truncate">{{ company_name | default: 'Company' }}</div>
+
+        <div class="mt-3 flex flex-wrap gap-2 text-xs">
+          {%- if location -%}
+            <span class="inline-flex items-center rounded-full bg-indigo-50 text-indigo-500 px-3 py-1 font-medium">
+              {{ location }}
+            </span>
+          {%- endif -%}
+          {%- if salary -%}
+            <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 font-medium">
+              {{ salary }}
+            </span>
+          {%- endif -%}
+          {%- if employment_type -%}
+            <span class="inline-flex items-center rounded-full bg-slate-100 text-slate-700 px-3 py-1 font-medium">
+              {{ employment_type }}
+            </span>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 sm:mt-0 sm:text-right sm:shrink-0">
+      <div class="text-xs text-slate-500 whitespace-nowrap">{{ posted_at | date: "%b %d, %Y" }}</div>
+      <div class="mt-3">
+        <a class="text-sm font-semibold text-indigo-500 hover:underline" href="/s/apply" data-turbo-frame="main-content-frame" data-turbo-action="advance">
+          Apply now →
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+

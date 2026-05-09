@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="scroll-smooth bg-slate-50" lang="{{ site.language }}">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Baklib">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% meta_tags %}
+    {{ 'stylesheets/application.css' | asset_url | stylesheet_tag: data-turbo-track: 'reload' }}
+    {{ 'baklib/shared/main.css' | asset_url | stylesheet_tag: data-turbo-track: 'reload' }}
+    {{ 'baklib/shared/main.js' | asset_url | stylesheet_tag: data-turbo-track: 'reload' }}
+    {{ 'javascripts/application.js' | asset_url | script_tag: defer: true, data-turbo-track: 'reload' }}
+    {{ site.settings.head_html }}
+
+    {%- assign hero_bg_url = site.settings.hero_bg_url | presence -%}
+    {%- if hero_bg_url -%}
+      <style>
+        body {
+          background-image: url('{{ hero_bg_url }}');
+          background-repeat: no-repeat;
+          background-position: top center;
+        }
+      </style>
+    {%- endif -%}
+
+    {%- comment -%}
+      GEO / SEO: JobPosting JSON-LD（仅职位详情页输出）
+      字段优先取 ext_info，其次取 settings，最后兜底为空。
+    {%- endcomment -%}
+    {%- if page and page.template_name == 'page' -%}
+      {%- assign job_title = page.ext_info.title | default: page.link_text -%}
+      {%- assign job_company = page.ext_info.company_name | default: page.settings.company_name -%}
+      {%- assign job_location = page.ext_info.location | default: page.settings.location -%}
+      {%- assign job_salary = page.ext_info.salary | default: page.settings.salary -%}
+      {%- assign job_employment_type = page.ext_info.employment_type | default: page.settings.employment_type -%}
+      {%- assign job_date_posted = page.ext_info.date_posted | default: page.published_at | default: page.created_at -%}
+      {%- assign job_apply_url = '/s/apply' -%}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "JobPosting",
+          "title": {{ job_title | json }},
+          "datePosted": {{ job_date_posted | date: "%Y-%m-%d" | json }},
+          "employmentType": {{ job_employment_type | default: "" | json }},
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": {{ job_company | default: "" | json }}
+          },
+          "jobLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": {{ job_location | default: "" | json }}
+            }
+          },
+          "baseSalary": {{ job_salary | default: "" | json }},
+          "directApply": true,
+          "applicationContact": {
+            "@type": "ContactPoint",
+            "url": {{ job_apply_url | json }}
+          }
+        }
+      </script>
+    {%- endif -%}
+  </head>
+
+  <body class="min-h-screen bg-slate-50 text-slate-800 antialiased flex flex-col" x-data>
+    {% render 'header' %}
+    <turbo-frame id="main-content-frame" data-turbo-action="advance" class="flex-1 flex flex-col">
+      {{ content_for_layout }}
+    </turbo-frame>
+    {% render 'footer' %}
+  </body>
+</html>
+

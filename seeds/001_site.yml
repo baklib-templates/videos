@@ -1,0 +1,9 @@
+site:
+  language: "zh-CN"
+  time_zone: "Asia/Shanghai"
+  favicon: ""
+  settings:
+    brand_name: "Jobs"
+    brand_slogan: "专业级企业雇主品牌与招聘门户"
+        cta_label: "Apply now"
+

@@ -1,0 +1,36 @@
+<header class="sticky top-0 z-40 bg-slate-50/90 backdrop-blur border-b border-slate-200">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <div class="shrink-0 mr-4 flex items-center gap-3">
+        <a class="inline-flex items-center gap-2" href="{{ site.index_path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance" aria-label="Home">
+          {%- assign brand_name = site.settings.brand_name | default: site.name -%}
+          {%- assign favicon_url = site.favicon_url | presence -%}
+          {%- if favicon_url -%}
+            <img class="h-9 w-9" src="{{ favicon_url }}" alt="{{ brand_name | escape }}" loading="eager" />
+          {%- else -%}
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-teal text-white font-bold">J</span>
+          {%- endif -%}
+          <span class="text-lg md:text-xl font-extrabold tracking-tight">{{ brand_name }}</span>
+        </a>
+      </div>
+
+      <nav class="flex grow">
+        <ul class="flex grow justify-end flex-wrap items-center gap-2">
+          <li class="hidden sm:block">
+            <a class="text-sm font-medium text-indigo-500 hover:underline px-3 py-2" href="javascript:void(0)">Sign in</a>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="btn btn-outline sm:hidden"
+              @click="$store.jobs.toggleMobileFilters()"
+            >
+              Filters
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+

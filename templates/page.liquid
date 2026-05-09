@@ -1,0 +1,123 @@
+{%- assign job_title = page.ext_info.title | default: page.link_text -%}
+{%- assign company_name = page.settings.company_name | default: page.ext_info.company_name -%}
+{%- assign location = page.settings.location | default: page.ext_info.location -%}
+{%- assign salary = page.settings.salary | default: page.ext_info.salary -%}
+{%- assign employment_type = page.settings.employment_type | default: page.ext_info.employment_type -%}
+{%- assign posted_at = page.ext_info.date_posted | default: page.published_at | default: page.created_at -%}
+{%- assign apply_url = '/s/apply' -%}
+{%- assign siblings = page.parent.children_in_list | order_by: '-published_at' -%}
+
+<main class="mx-auto max-w-6xl px-4 sm:px-6 py-10 md:py-12 grow">
+  <div class="mb-8">
+    <a class="inline-flex items-center gap-2 text-sm font-medium text-indigo-500 hover:underline" href="{{ page.parent.path | default: site.index_path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance">
+      <span aria-hidden="true"> ← </span>
+      <span>首页</span>
+    </a>
+    <a class="inline-flex items-center gap-2 text-sm font-medium text-indigo-500 hover:underline" href="{{ page.parent.path | default: site.index_path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance">
+      <span aria-hidden="true"> | </span>
+      <span>返回栏目</span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-7 xl:col-span-8">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">
+        {{ job_title }}
+      </h1>
+
+      {%- if page.settings.description -%}
+        <p class="text-lg text-slate-500 mb-6">{{ page.settings.description }}</p>
+      {%- endif -%}
+
+      <div class="bg-white rounded-xl border border-slate-200 p-6 md:p-8">
+        <div class="ProseMirror max-w-none">
+          {{ page.settings.content }}
+        </div>
+      </div>
+    </div>
+
+    <aside class="lg:col-span-5 xl:col-span-4">
+      <div class="sticky top-24 space-y-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-6">
+          <div class="flex items-start gap-4">
+            <div class="h-14 w-14 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 font-extrabold shrink-0">
+              {{ company_name | default: 'Co' | slice: 0, 2 }}
+            </div>
+            <div class="min-w-0">
+              <h2 class="text-lg font-extrabold text-slate-900 truncate">{{ company_name | default: 'Company' }}</h2>
+              <div class="mt-1 text-sm text-slate-500">We’re hiring. Join our mission.</div>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <a class="btn btn-primary w-full" href="{{ apply_url }}" data-turbo-frame="main-content-frame" data-turbo-action="advance">
+              Apply now
+            </a>
+          </div>
+
+          <dl class="mt-6 space-y-3 text-sm">
+            <div class="flex items-center justify-between gap-4">
+              <dt class="text-slate-500">Posted</dt>
+              <dd class="font-semibold text-slate-800">{{ posted_at | date: "%Y-%m-%d" }}</dd>
+            </div>
+            {%- if location -%}
+              <div class="flex items-center justify-between gap-4">
+                <dt class="text-slate-500">Location</dt>
+                <dd class="font-semibold text-slate-800 text-right">{{ location }}</dd>
+              </div>
+            {%- endif -%}
+            {%- if salary -%}
+              <div class="flex items-center justify-between gap-4">
+                <dt class="text-slate-500">Salary</dt>
+                <dd class="font-semibold text-slate-800 text-right">{{ salary }}</dd>
+              </div>
+            {%- endif -%}
+            {%- if employment_type -%}
+              <div class="flex items-center justify-between gap-4">
+                <dt class="text-slate-500">Type</dt>
+                <dd class="font-semibold text-slate-800 text-right">{{ employment_type }}</dd>
+              </div>
+            {%- endif -%}
+          </dl>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <!-- related jobs -->
+  <div class="bg-slate-50 mt-12">
+    <div class="text-lg md:text-2xl font-extrabold text-slate-900 mb-3">Related jobs</div>
+    <div class="bg-white rounded-xl border border-slate-200 divide-y divide-slate-100">
+      {%- assign related_count = 0 -%}
+      {%- for job in siblings -%}
+        {%- if job.id != page.id and related_count < 4 -%}
+          {%- assign related_count = related_count | plus: 1 -%}
+          {% render 'job_card', job: job %}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if related_count == 0 -%}
+        <div class="p-4 text-sm text-slate-500">No related jobs.</div>
+      {%- endif -%}
+    </div>
+  </div>
+</main>
+
+{% schema %}
+  {
+    "name": "Job Post",
+    "description": "Job post detail",
+    "thumb_url": "images/theme/preview-page.png",
+    "preview_image_urls": ["images/theme/preview-page.png"],
+    "sub_page_templates": [],
+    "settings": [
+      { "id": "title", "type": "text", "label": "Job title" },
+      { "id": "company_name", "type": "select", "label": "Company name", "choices_from": "$site.company_name_options", "queryable": true },
+      { "id": "location", "type": "select", "label": "Location", "choices_from": "$site.location_options", "queryable": true },
+      { "id": "salary", "type": "select", "label": "Salary", "choices_from": "$site.salary_options", "queryable": true },
+      { "id": "employment_type", "type": "select", "label": "Employment type", "choices_from": "$site.employment_type_options", "queryable": true },
+      { "id": "apply_url", "type": "text", "label": "Apply URL", "default": "/s/apply", "info": "已统一指向 /s/apply；通常无需修改。" },
+      { "id": "description", "type": "textarea", "label": "Short description", "to_markdown": true },
+      { "id": "content", "type": "richtext", "label": "Job description", "to_markdown": true }
+    ]
+  }
+{% endschema %}
+

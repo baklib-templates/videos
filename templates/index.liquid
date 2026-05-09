@@ -1,0 +1,185 @@
+{%- assign channels = site.pages['/'].children_in_list -%}
+{%- assign filter_company = params.company_name | default: '' | strip -%}
+{%- assign filter_location = params.location | default: '' | strip -%}
+{%- assign filter_salary = params.salary | default: '' | strip -%}
+{%- assign filter_employment_type = params.employment_type | default: '' | strip -%}
+
+{% query jobs_all from site.pages %}
+  {
+    "where": {
+      "and": {
+        "template_name_eq": "page"
+        {%- if filter_company != '' -%}
+        ,"settings.company_name_eq": "{{ filter_company }}"
+        {%- endif -%}
+        {%- if filter_location != '' -%}
+        ,"settings.location_eq": "{{ filter_location }}"
+        {%- endif -%}
+        {%- if filter_salary != '' -%}
+        ,"settings.salary_eq": "{{ filter_salary }}"
+        {%- endif -%}
+        {%- if filter_employment_type != '' -%}
+        ,"settings.employment_type_eq": "{{ filter_employment_type }}"
+        {%- endif -%}
+      }
+    },
+    "order_by": ["-published_at"]
+  }
+{% endquery %}
+
+{% render 'hero' %}
+
+{%- assign press_logos_html = site.settings.press_logos | presence -%}
+{%- if press_logos_html -%}
+  <section class="border-b border-slate-200">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="py-6 lg:py-4">
+        <div class="flex flex-wrap items-center justify-around text-center text-slate-400">
+          {{ press_logos_html | raw }}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<main class="grow">
+  <section class="py-8 md:py-12">
+    {%- assign company_options = site.settings.company_name_options | default: '' | newline_to_br | split: '<br />' -%}
+    {%- assign location_options = site.settings.location_options | default: '' | newline_to_br | split: '<br />' -%}
+    {%- assign salary_options = site.settings.salary_options | default: '' | newline_to_br | split: '<br />' -%}
+    {%- assign employment_type_options = site.settings.employment_type_options | default: '' | newline_to_br | split: '<br />' -%}
+
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="md:flex md:justify-between">
+        <aside class="mb-8 md:mb-0 md:w-64 lg:w-72 md:ml-12 lg:ml-20 md:shrink-0 md:order-1">
+          <div class="sticky top-24">
+            <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
+              <div class="text-sm font-extrabold text-slate-900 mb-4">
+                <span>Filters</span>
+              </div>
+
+              <form
+                class="space-y-4"
+                method="get"
+                action="{{ page.path }}"
+                data-turbo-frame="main-content-frame"
+                data-turbo-action="advance"
+              >
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1" for="filter-company_name">Company</label>
+                  <select id="filter-company_name" name="company_name" class="form-select">
+                    <option value="" {% if filter_company == blank %}selected{% endif %}>全部</option>
+                    {%- for v in company_options -%}
+                      {%- assign vv = v | strip -%}
+                      {%- if vv != blank -%}
+                        <option value="{{ vv | escape }}" {% if filter_company == vv %}selected{% endif %}>{{ vv }}</option>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1" for="filter-location">Location</label>
+                  <select id="filter-location" name="location" class="form-select">
+                    <option value="" {% if filter_location == blank %}selected{% endif %}>全部</option>
+                    {%- for v in location_options -%}
+                      {%- assign vv = v | strip -%}
+                      {%- if vv != blank -%}
+                        <option value="{{ vv | escape }}" {% if filter_location == vv %}selected{% endif %}>{{ vv }}</option>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1" for="filter-salary">Salary</label>
+                  <select id="filter-salary" name="salary" class="form-select">
+                    <option value="" {% if filter_salary == blank %}selected{% endif %}>全部</option>
+                    {%- for v in salary_options -%}
+                      {%- assign vv = v | strip -%}
+                      {%- if vv != blank -%}
+                        <option value="{{ vv | escape }}" {% if filter_salary == vv %}selected{% endif %}>{{ vv }}</option>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1" for="filter-employment_type">Employment type</label>
+                  <select id="filter-employment_type" name="employment_type" class="form-select">
+                    <option value="" {% if filter_employment_type == blank %}selected{% endif %}>全部</option>
+                    {%- for v in employment_type_options -%}
+                      {%- assign vv = v | strip -%}
+                      {%- if vv != blank -%}
+                        <option value="{{ vv | escape }}" {% if filter_employment_type == vv %}selected{% endif %}>{{ vv }}</option>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </select>
+                </div>
+
+                <div class="flex flex-wrap gap-2 pt-1">
+                  <button type="submit" class="btn btn-primary flex-1 min-w-[6rem]">筛选</button>
+                  <a
+                    class="btn btn-outline flex-1 min-w-[6rem] text-center"
+                    href="{{ page.path }}"
+                    data-turbo-frame="main-content-frame"
+                    data-turbo-action="advance"
+                  >Clear</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </aside>
+
+        <div class="md:grow">
+          <h2 class="text-xl md:text-3xl font-extrabold text-slate-900 mb-4">Latest jobs</h2>
+          
+          {%- assign channels_count = channels | size -%}
+          {%- if channels_count > 0 -%}
+            <nav class="mb-6">
+              <ul class="flex flex-wrap gap-2">
+                {%- for ch in channels -%}
+                  <li>
+                    <a
+                      class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                      href="{{ ch.path }}"
+                      data-turbo-frame="main-content-frame"
+                      data-turbo-action="advance"
+                    >
+                      {{ ch.link_text | default: ch.name }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+          <div class="bg-white rounded-xl border border-slate-200 divide-y divide-slate-100">
+            {% paginate_tag jobs_all, as: 'jobs', per: 10 %}
+              {%- for job in jobs -%}
+                {% render 'job_card', job: job %}
+              {%- else -%}
+                <div class="p-6 text-sm text-slate-500">No jobs yet.</div>
+              {%- endfor -%}
+              <div class="py-6">
+                {% render 'paginate', paginate: paginate %}
+              </div>
+            {% endpaginate_tag %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+{% schema %}
+  {
+    "name": "Jobs Index",
+    "description": "Cruip JobBoard style",
+    "thumb_url": "images/theme/preview-index.png",
+    "preview_image_urls": ["images/theme/preview-index.png"],
+    "sub_page_templates": ["channel"]
+  }
+{% endschema %}
+
