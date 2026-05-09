@@ -1,0 +1,103 @@
+/* Course detail prose — aligned with reference typography scale */
+.prose {
+  color: hsl(var(--theme-color-base-content) / 0.7);
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.prose * + * {
+  margin-top: 1.5rem;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: hsl(var(--theme-color-base-content));
+}
+
+.prose h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  letter-spacing: -0.025em;
+}
+
+.prose h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  margin-top: 3.75rem;
+}
+
+.prose h3 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  margin-top: 2.5rem;
+}
+
+.prose a {
+  color: hsl(var(--theme-color-base-content));
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: hsl(var(--theme-color-base-content) / 0.25);
+}
+
+.prose ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+}
+
+.prose ol li {
+  padding-left: 0.625rem;
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.prose ul li {
+  padding-left: 0.625rem;
+}
+
+.prose pre {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+
+.prose pre > code {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: white;
+}
+
+.prose img {
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--theme-color-base-content) / 0.12);
+}
+
+.prose strong {
+  font-weight: 600;
+  color: hsl(var(--theme-color-base-content));
+}
+
+.prose code:not(pre code) {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: hsl(var(--theme-color-base-content));
+}
+
+.prose code:not(pre code)::before,
+.prose code:not(pre code)::after {
+  content: "`";
+}

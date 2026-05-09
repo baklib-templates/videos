@@ -1,0 +1,133 @@
+{%- assign root = site.pages['/'] -%}
+{%- assign nav_items = '' -%}
+{%- if root -%}
+  {%- assign nav_items = root.children_in_nav_menu -%}
+  {%- if nav_items == blank -%}
+    {%- assign nav_items = root.children_in_list -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div class="sticky top-0 z-20 flex items-center justify-between gap-x-8 border-b border-base-300/20 bg-base-100/90 px-4 py-4 backdrop-blur-sm sm:px-6">
+  <div class="flex min-w-0 shrink items-center gap-x-4">
+    <button
+      type="button"
+      class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content xl:hidden"
+      @click="$store.theme_shell.toggleMobileCourse()"
+      aria-label="Open course outline"
+    >
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+    </button>
+    <button
+      type="button"
+      class="hidden rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content max-xl:hidden xl:group-data-sidebar-collapsed:flex"
+      @click="$store.theme_shell.toggleSidebar()"
+      aria-label="Open sidebar"
+    >
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+    </button>
+    <div class="min-w-0 text-sm/6 text-base-content/70">
+      {{ breadcrumbs }}
+    </div>
+  </div>
+  <nav class="flex items-center gap-x-6 text-sm/6 text-base-content max-lg:hidden">
+    {%- if nav_items != blank -%}
+      {%- for item in nav_items -%}
+        <a
+          href="{{ item.path }}"
+          class="hover:text-primary"
+          data-turbo-frame="main-content-frame"
+          data-turbo-action="advance"
+        >{{ item.link_text | default: item.name }}</a>
+      {%- endfor -%}
+    {%- endif -%}
+    {{ site.settings.header_menu_html }}
+    {%- if current_user -%}
+      <a href="/s/new" class="btn btn-sm bg-primary text-white hover:bg-secondary">{{ 'buttons.create_post' | t }}</a>
+      <div class="relative" x-data="{ open: false }">
+        <button
+          type="button"
+          class="inline-flex items-center gap-x-2 rounded-md px-2 py-1 text-base-content hover:bg-base-content/5 hover:text-primary"
+          @click="open = !open"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          :aria-expanded="open"
+        >
+          <span>{{ 'generic.profile' | t }}</span>
+          <svg class="h-4 w-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div
+          class="absolute right-0 z-30 mt-2 min-w-48 rounded-md border border-base-300/20 bg-base-100 py-1 shadow-lg"
+          x-show="open"
+          @click.outside="open = false"
+          x-cloak
+          style="display: none;"
+        >
+          <div class="flex items-center gap-x-2 border-b border-base-300/20 px-4 py-2 text-sm text-base-content/80">
+            {%- if current_user.image -%}
+              <img src="{{ current_user.image }}" class="h-5 w-5 rounded-full" alt="">
+            {%- else -%}
+              <svg class="h-5 w-5 rounded-full stroke-current text-base-content/60" viewBox="0 0 24 24" fill="none" stroke-width="1.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+              </svg>
+            {%- endif -%}
+            <span class="truncate">{{ current_user.name }}</span>
+          </div>
+          <a class="block px-4 py-2 text-sm text-base-content/80 hover:bg-base-content/5" href="{{ current_user.profile_url }}" target="_blank">{{ 'generic.profile' | t }}</a>
+          {% form_tag 'sign_out' %}
+            <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-base-content/80 hover:bg-base-content/5">{{ 'buttons.logout' | t }}</button>
+          {% endform_tag %}
+        </div>
+      </div>
+    {%- else -%}
+      {% form_tag 'sign_in_with_baklib' %}
+        <input value="true" type="hidden" name="sign_up">
+        <input type="submit" value="{{ 'buttons.join' | t }}" class="btn bg-primary text-white hover:bg-secondary" data-disable-with=" ... ">
+      {% endform_tag %}
+    {%- endif -%}
+  </nav>
+  <button
+    type="button"
+    class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content lg:hidden"
+    @click="$store.theme_shell.toggleMobileNav()"
+    aria-label="Menu"
+  >
+    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+  </button>
+</div>
+
+<div
+  class="fixed inset-0 z-40 bg-neutral/60 lg:hidden"
+  x-show="$store.theme_shell.mobileNavOpen"
+  x-transition.opacity
+  x-cloak
+  @click="$store.theme_shell.mobileNavOpen = false"
+  style="display: none;"
+></div>
+<div
+  class="fixed inset-y-0 right-0 z-50 flex w-full max-w-xs flex-col border-l border-base-300/20 bg-base-100 shadow-xl lg:hidden"
+  x-show="$store.theme_shell.mobileNavOpen"
+  x-transition:enter="transition transform"
+  x-transition:enter-start="translate-x-full"
+  x-transition:enter-end="translate-x-0"
+  x-cloak
+  style="display: none;"
+>
+  <div class="flex justify-end border-b border-base-300/20 p-4">
+    <button type="button" class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5" @click="$store.theme_shell.mobileNavOpen = false" aria-label="Close">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="flex flex-col gap-y-2 px-4 py-4">
+    {%- if nav_items != blank -%}
+      {%- for item in nav_items -%}
+        <a
+          class="block rounded-md px-4 py-2 text-lg font-medium text-base-content hover:bg-base-content/5"
+          href="{{ item.path }}"
+          data-turbo-frame="main-content-frame"
+          data-turbo-action="advance"
+          @click="$store.theme_shell.mobileNavOpen = false"
+        >{{ item.link_text | default: item.name }}</a>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>

@@ -1,67 +1,82 @@
 pages:
-  name: "首页"
-  slug: "index"
-  template_name: "index"
+  name: Home
+  slug: index
+  template_name: index
 
   children:
-    - name: "Jobs"
-      slug: "jobs"
-      template_name: "channel"
+    - name: "Orientation: Understanding Where You Are"
+      slug: orientation
+      template_name: channel
       settings:
-        title: "Jobs"
-        description: "精选职位列表（示例数据）"
+        description: "You need to know where you're starting from, before you can pretend to decide where you're going."
       children:
-        - name: "Senior Software Engineer"
-          slug: "senior-software-engineer"
-          template_name: "page"
+        - name: "The Landscape of Choice"
+          slug: landscape-of-choice
+          template_name: page
           settings:
-            title: "Senior Software Engineer"
-            company_name: "Acme Inc."
-            location: "Remote / Shanghai"
-            salary: "$75K - $100K"
-            employment_type: "Full-time"
-            apply_url: "/apply"
-            description: "负责核心产品的前端/全栈工程建设，推动交付与体验优化。"
-            content: |
-              <h2>About the role</h2>
-              <p>你将参与核心业务的架构设计与工程落地，负责性能、可维护性与交付效率。</p>
-              <h2>Responsibilities</h2>
-              <ul>
-                <li>与产品/设计协作，推动高质量交付</li>
-                <li>建设工程化与组件化体系</li>
-                <li>参与性能与稳定性优化</li>
-              </ul>
-
-        - name: "Product Designer"
-          slug: "product-designer"
-          template_name: "page"
+            description: "A practical map for navigating the illusion that you actually have any agency at all."
+            video_url: "https://assets.tailwindcss.com/templates/compass/landscape-of-choice.mp4"
+            thumb_image_url: "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-01.png"
+            duration_seconds: 876
+            content: "preset:lesson-body.html"
+        - name: "The Paradox of Agency"
+          slug: paradox-of-agency
+          template_name: page
           settings:
-            title: "Product Designer"
-            company_name: "Medium Inc."
-            location: "London, UK / Remote friendly"
-            salary: "$60K - $90K"
-            employment_type: "Full-time"
-            apply_url: "/apply"
-            description: "负责招聘门户与雇主品牌的体验与视觉体系。"
-            content: |
-              <h2>What you’ll do</h2>
-              <p>与跨职能团队合作，完成从信息架构到 UI 细节的全链路设计。</p>
-
-        - name: "Customer Support Specialist"
-          slug: "customer-support-specialist"
-          template_name: "page"
+            description: "Explore whether you're living your life or just reacting to everyone else's."
+            duration_seconds: 0
+            content: "preset:lesson-body.html"
+        - name: "Liberation from Regret"
+          slug: liberation-from-regret
+          template_name: page
           settings:
-            title: "Customer Support Specialist"
-            company_name: "Beta Labs"
-            location: "Shenzhen"
-            salary: "Negotiable"
-            employment_type: "Contract"
-            apply_url: "/apply"
-            description: "负责客户问题响应与知识库维护，提升满意度。"
-            content: |
-              <h2>Requirements</h2>
-              <ul>
-                <li>良好的沟通能力与同理心</li>
-                <li>能独立推动问题闭环</li>
-              </ul>
+            description: "If no alternative choice was ever possible, regret becomes logically unnecessary."
+            video_url: "https://assets.tailwindcss.com/templates/compass/liberation-from-regret.mp4"
+            thumb_image_url: "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-02.png"
+            duration_seconds: 947
+            content: "preset:lesson-body.html"
 
+    - name: "Direction: Choosing a Path"
+      slug: direction
+      template_name: channel
+      settings:
+        description: "Experience the sensation of choice without the burden of true responsibility."
+      children:
+        - name: "Mapping the Causal Factors"
+          slug: mapping-causal-factors
+          template_name: page
+          settings:
+            description: "The causes acting on you can give you insight into where they might take you."
+            video_url: "https://assets.tailwindcss.com/templates/compass/mapping-causal-factors.mp4"
+            thumb_image_url: "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-03.png"
+            duration_seconds: 892
+            content: "preset:lesson-body.html"
+
+    - name: Interviews
+      slug: interviews
+      template_name: channel.grid
+      settings:
+        description: "Explore interviews with industry experts and thought leaders."
+      children:
+        - name: "Annie King"
+          slug: annie-king
+          template_name: page
+          settings:
+            subtitle: "Interview"
+            intro: "Annie King shares her approach to life planning through her Legacy Tracker system and the art of scheduled spontaneity."
+            video_url: "https://assets.tailwindcss.com/templates/compass/annie-king-1080p.mp4"
+            thumb_image_url: "https://assets.tailwindcss.com/templates/compass/annie-king-video-thumbnail.png"
+            duration_seconds: 2570
+            chapters_html: "preset:annie-chapters.html"
+            transcript_html: "preset:annie-transcript.html"
+            content: "<h2>Highlights</h2><p>Select a chapter to jump in the video, or read the transcript below.</p>"
+        - name: "Dr. Nolan Grayson"
+          slug: nolan-grayson
+          template_name: page
+          settings:
+            subtitle: "Is Quantum Nirvana the key to true freedom?"
+            intro: "Dr. Nolan Grayson explores quantum determinism and the illusion of free will."
+            video_url: "https://assets.tailwindcss.com/templates/compass/nolan-grayson-1080p.mp4"
+            thumb_image_url: "https://assets.tailwindcss.com/templates/compass/nolan-grayson-video-thumbnail.png"
+            duration_seconds: 3480
+            content: "<h2>Highlights</h2><p>Discussion of parallel outcomes and perceived agency.</p>"

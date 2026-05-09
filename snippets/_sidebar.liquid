@@ -1,0 +1,31 @@
+{%- assign root = site.pages['/'] -%}
+{%- if root == blank -%}
+  <p class="text-sm text-base-content/60">No pages.</p>
+{%- else -%}
+  <div class="space-y-8">
+    {%- for mod in root.children_in_list -%}
+      {%- if mod.template_name == 'channel' -%}
+        <div>
+          <h2 class="text-base/7 font-semibold text-pretty text-base-content sm:text-sm/6">
+            {{ mod.link_text | default: mod.name }}
+          </h2>
+          <ul class="mt-4 flex flex-col gap-4 border-l border-base-300/30 text-base/7 text-base-content/70 sm:mt-3 sm:gap-3 sm:text-sm/6">
+            {%- for lesson in mod.children_in_list -%}
+              <li class="-ml-px flex border-l border-transparent pl-4 hover:border-base-300 hover:text-base-content has-[a[aria-current=page]]:border-base-content">
+                <a
+                  href="{{ lesson.path }}"
+                  data-turbo-frame="main-content-frame"
+                  data-turbo-action="advance"
+                  class="aria-[current=page]:font-medium aria-[current=page]:text-base-content"
+                  {% if current_page and lesson.id == current_page.id %}aria-current="page"{% endif %}
+                >
+                  {{ lesson.link_text | default: lesson.name }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

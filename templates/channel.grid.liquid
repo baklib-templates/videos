@@ -1,0 +1,49 @@
+{%- assign items = page.children_in_list -%}
+
+{%- capture nav_breadcrumbs -%}
+<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
+  <a href="{{ site.index_path }}" class="hover:text-primary">Home</a>
+  <span class="text-base-content/30">/</span>
+  <span class="font-medium text-base-content">{{ page.link_text | default: page.name }}</span>
+</nav>
+{%- endcapture -%}
+
+{% render 'navbar', breadcrumbs: nav_breadcrumbs %}
+
+<main class="grow px-4 sm:px-6">
+  <div class="mx-auto max-w-6xl">
+    <h1 class="mt-10 text-3xl/10 font-normal tracking-tight text-base-content sm:mt-14">{{ page.link_text | default: page.name }}</h1>
+    {%- if page.settings.description != blank -%}
+      <p class="mt-6 max-w-xl text-base/7 text-base-content/70">{{ page.settings.description }}</p>
+    {%- endif -%}
+
+    <div class="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 pb-32 sm:grid-cols-2 xl:grid-cols-3">
+      {%- for it in items -%}
+        {%- assign ds = it.settings.duration_seconds | default: 0 | plus: 0 -%}
+        {%- capture dcard -%}{% render 'duration_label', seconds: ds %}{%- endcapture -%}
+        {% render 'video_card',
+          href: it.path,
+          thumbnail: it.settings.thumb_image_url,
+          title: it.link_text,
+          subtitle: it.settings.subtitle,
+          duration_label: dcard | strip
+        %}
+      {%- else -%}
+        <p class="text-sm text-gray-500">No items yet.</p>
+      {%- endfor -%}
+    </div>
+  </div>
+</main>
+
+{% schema %}
+  {
+    "name": "Grid channel",
+    "description": "Video card grid (e.g. interviews)",
+    "thumb_url": "images/theme/preview-index.png",
+    "preview_image_urls": ["images/theme/preview-index.png"],
+    "sub_page_templates": ["page"],
+    "settings": [
+      { "id": "description", "type": "textarea", "label": "Description", "to_markdown": true }
+    ]
+  }
+{% endschema %}

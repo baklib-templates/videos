@@ -1,0 +1,71 @@
+{%- assign interviews_path = '' -%}
+{%- assign interviews_title = '' -%}
+{%- assign root = site.pages['/'] -%}
+{%- if root -%}
+  {%- for p in root.children_in_list -%}
+    {%- if p.template_name == 'channel.grid' -%}
+      {%- assign interviews_path = p.path -%}
+      {%- assign interviews_title = p.link_text | default: p.name -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+<div
+  class="group flex min-h-screen flex-col bg-base-100 text-base-content"
+  x-data
+  x-bind:data-sidebar-collapsed="$store.theme_shell.sidebarOpen ? null : ''"
+>
+  {%- comment -%} Mobile course drawer {%- endcomment -%}
+  <div
+    class="fixed inset-0 z-40 bg-neutral/60 xl:hidden"
+    x-show="$store.theme_shell.mobileCourseOpen"
+    x-transition.opacity
+    x-cloak
+    @click="$store.theme_shell.mobileCourseOpen = false"
+    style="display: none;"
+  ></div>
+  <div
+    class="fixed inset-y-0 left-0 z-50 w-full max-w-xs overflow-y-auto border-r border-base-300/20 bg-base-100 shadow-xl xl:hidden"
+    x-show="$store.theme_shell.mobileCourseOpen"
+    x-transition:enter="transition transform"
+    x-transition:enter-start="-translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-cloak
+    style="display: none;"
+  >
+    <div class="flex h-14 items-center justify-end border-b border-base-300/20 px-4">
+      <button
+        type="button"
+        class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content"
+        @click="$store.theme_shell.mobileCourseOpen = false"
+        aria-label="Close"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="px-4 py-4" aria-label="Course">
+      {% render 'sidebar', current_page: page, interviews_path: interviews_path, interviews_title: interviews_title %}
+    </nav>
+  </div>
+
+  {%- comment -%} Desktop sidebar {%- endcomment -%}
+  <aside class="fixed inset-y-0 left-0 z-30 hidden w-64 overflow-y-auto border-r border-base-300/20 bg-base-100 xl:block group-data-sidebar-collapsed:hidden">
+    <nav aria-label="Course" class="px-6 py-4">
+      <div class="sticky top-4 flex h-8 items-center justify-between">
+        <button
+          type="button"
+          class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content"
+          @click="$store.theme_shell.toggleSidebar()"
+          aria-label="Toggle sidebar"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+        </button>
+      </div>
+      <div class="mt-3">
+        {% render 'sidebar', current_page: page, interviews_path: interviews_path, interviews_title: interviews_title %}
+      </div>
+    </nav>
+  </aside>
+
+  <div class="flex min-h-screen flex-1 flex-col transition-[padding] duration-200 xl:pl-64 group-data-sidebar-collapsed:xl:pl-0">

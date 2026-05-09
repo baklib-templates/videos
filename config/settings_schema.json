@@ -1,15 +1,15 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "jobs",
-    "theme_label": "jobs",
-    "theme_description": "专业级企业雇主品牌与招聘门户。复刻硅谷顶级 Job Board 视觉范式，内置结构化招聘 Schema，支持一键发布职位、在线投递与简历收集，助力企业打造高转化率的人才引力场。",
-    "theme_version": "0.0.1",
+    "theme_name": "videos",
+    "theme_label": "Video Course",
+    "theme_description": "视频课程站点主题：侧栏大纲、课时详情、访谈网格列表，参考 Tailwind Plus 课程类 UI。",
+    "theme_version": "0.1.0",
     "theme_syntax_version": "v2",
     "theme_scope": "cms",
     "theme_author": "Baklib",
-    "theme_documentation_url": "https://help.baklib.cn/theme/jobs",
-    "theme_support_url": "https://help.baklib.cn/theme/jobs",
+    "theme_documentation_url": "https://help.baklib.cn/",
+    "theme_support_url": "https://help.baklib.cn/",
     "theme_thumb_url": "images/theme/thumb.png",
     "theme_preview_images": [
       "images/theme/preview-index.png",
@@ -22,14 +22,93 @@
     "recommendations": {
       "color_schemas": {
         "default": {
-          "name": "Teal / Orange",
+          "name": "Gray / Dark",
           "colors": {
-            "--theme-color-primary": "#0d9488",
-            "--theme-color-secondary": "#ea580c",
-            "--theme-color-accent": "#64748b",
-            "--theme-color-info": "#0ea5e9",
-            "--theme-color-success": "#22c55e",
-            "--theme-color-warning": "#f59e0b"
+            "--theme-color-base-100": "0 0% 100%",
+            "--theme-color-base-200": "0 0% 96%",
+            "--theme-color-base-300": "0 0% 90%",
+            "--theme-color-base-content": "222 47% 11%",
+            "--theme-color-primary": "222 47% 11%",
+            "--theme-color-primary-content": "0 0% 100%",
+            "--theme-color-secondary": "215 16% 47%",
+            "--theme-color-secondary-content": "0 0% 100%",
+            "--theme-color-accent": "215 16% 47%",
+            "--theme-color-accent-content": "0 0% 100%",
+            "--theme-color-neutral": "222 47% 11%",
+            "--theme-color-neutral-content": "0 0% 100%",
+            "--theme-color-info": "199 89% 48%",
+            "--theme-color-info-content": "0 0% 100%",
+            "--theme-color-success": "142 71% 45%",
+            "--theme-color-success-content": "0 0% 100%",
+            "--theme-color-warning": "38 92% 50%",
+            "--theme-color-warning-content": "222 47% 11%",
+            "--theme-color-error": "0 84% 60%",
+            "--theme-color-error-content": "0 0% 100%",
+            "--theme-color-base-100-dark": "222 47% 11%",
+            "--theme-color-base-200-dark": "222 47% 9%",
+            "--theme-color-base-300-dark": "222 47% 7%",
+            "--theme-color-base-content-dark": "210 40% 98%",
+            "--theme-color-primary-dark": "210 40% 98%",
+            "--theme-color-primary-content-dark": "222 47% 11%",
+            "--theme-color-secondary-dark": "215 16% 72%",
+            "--theme-color-secondary-content-dark": "222 47% 11%",
+            "--theme-color-accent-dark": "215 16% 72%",
+            "--theme-color-accent-content-dark": "222 47% 11%",
+            "--theme-color-neutral-dark": "210 40% 98%",
+            "--theme-color-neutral-content-dark": "222 47% 11%",
+            "--theme-color-info-dark": "199 89% 48%",
+            "--theme-color-info-content-dark": "222 47% 11%",
+            "--theme-color-success-dark": "142 71% 45%",
+            "--theme-color-success-content-dark": "222 47% 11%",
+            "--theme-color-warning-dark": "38 92% 50%",
+            "--theme-color-warning-content-dark": "222 47% 11%",
+            "--theme-color-error-dark": "0 84% 60%",
+            "--theme-color-error-content-dark": "222 47% 11%"
+          }
+        },
+        "fashion": {
+          "name": "时尚",
+          "colors": {
+            "--theme-color-base-100": "0 0% 100%",
+            "--theme-color-base-200": "0 0% 96%",
+            "--theme-color-base-300": "0 0% 90%",
+            "--theme-color-base-content": "222 47% 11%",
+            "--theme-color-primary": "232 71% 56%",
+            "--theme-color-primary-content": "0 0% 100%",
+            "--theme-color-secondary": "330 81% 60%",
+            "--theme-color-secondary-content": "0 0% 100%",
+            "--theme-color-accent": "215 16% 47%",
+            "--theme-color-accent-content": "0 0% 100%",
+            "--theme-color-neutral": "222 47% 11%",
+            "--theme-color-neutral-content": "0 0% 100%",
+            "--theme-color-info": "207 90% 54%",
+            "--theme-color-info-content": "0 0% 100%",
+            "--theme-color-success": "122 39% 49%",
+            "--theme-color-success-content": "0 0% 100%",
+            "--theme-color-warning": "45 100% 51%",
+            "--theme-color-warning-content": "222 47% 11%",
+            "--theme-color-error": "0 84% 60%",
+            "--theme-color-error-content": "0 0% 100%",
+            "--theme-color-base-100-dark": "222 47% 11%",
+            "--theme-color-base-200-dark": "222 47% 9%",
+            "--theme-color-base-300-dark": "222 47% 7%",
+            "--theme-color-base-content-dark": "210 40% 98%",
+            "--theme-color-primary-dark": "232 71% 70%",
+            "--theme-color-primary-content-dark": "222 47% 11%",
+            "--theme-color-secondary-dark": "330 81% 72%",
+            "--theme-color-secondary-content-dark": "222 47% 11%",
+            "--theme-color-accent-dark": "215 16% 72%",
+            "--theme-color-accent-content-dark": "222 47% 11%",
+            "--theme-color-neutral-dark": "210 40% 98%",
+            "--theme-color-neutral-content-dark": "222 47% 11%",
+            "--theme-color-info-dark": "207 90% 60%",
+            "--theme-color-info-content-dark": "222 47% 11%",
+            "--theme-color-success-dark": "122 39% 55%",
+            "--theme-color-success-content-dark": "222 47% 11%",
+            "--theme-color-warning-dark": "45 100% 55%",
+            "--theme-color-warning-content-dark": "222 47% 11%",
+            "--theme-color-error-dark": "0 84% 60%",
+            "--theme-color-error-content-dark": "222 47% 11%"
           }
         }
       }
@@ -39,91 +118,55 @@
     "name": "站点设置",
     "settings": [
       {
-        "id": "head_html",
-        "type": "html",
-        "label": "Head 自定义代码",
-        "rows": 8
-      },
-      {
         "id": "brand_name",
         "type": "text",
         "label": "品牌名称",
-        "default": "JobBoard"
+        "default": "Compass"
       },
       {
         "id": "brand_slogan",
-        "type": "text",
-        "label": "品牌标语",
-        "default": "Join the best teams in the industry."
+        "type": "textarea",
+        "label": "课程简介（首页展示）",
+        "default": "A comprehensive journey that helps you navigate uncertainty and make choices aligned with your values and goals.",
+        "rows": 3
       },
       {
-        "id": "cta_label",
-        "type": "text",
-        "label": "右上角 CTA 文案",
-        "default": "Apply now"
-      },
-      {
-        "id": "press_logos",
-        "type": "code",
-        "language": "html",
-        "label": "Press logos（HTML）",
-        "info": "粘贴 Cruip JobBoard 的 press logos 区块 HTML（svg/img），将按原样渲染。",
-        "default": ""
-      },
-      {
-        "id": "hero_html",
-        "type": "html",
-        "label": "Hero 自定义 HTML",
-        "rows": 10,
-        "info": "可选：填写后将完全替换默认 Hero 区块（注意保留容器宽度/间距类名）。",
-        "default": "preset:hero.html"
-      },
-      {
-        "id": "hero_bg_url",
+        "id": "hero_background_image",
         "type": "image_picker",
         "ratio": "16:9",
-        "width": 300,
-        "label": "Hero 背景图（全局）",
-        "info": "可选：用于全站背景（body background-image）。建议上传与 hero 适配的宽幅图。",
-        "default": ""
+        "width": 240,
+        "label": "首页 Hero 背景图",
+        "default": "images/theme/hero-background.png"
+      }
+    ]
+  },
+  {
+    "name": "t:schema.custom_html.name",
+    "settings": [
+      {
+        "id": "head_html",
+        "type": "html",
+        "label": "t:schema.custom_html.settings.head_html.label",
+        "info": "t:schema.custom_html.settings.head_html.info",
+        "rows": 10,
+        "placeholder": "t:schema.custom_html.settings.head_html.placeholder"
       },
       {
-        "type": "header",
-        "content": "职位字段下拉候选项（供 Job Post 引用）"
-      },
-      {
-        "id": "company_name_options",
-        "type": "textarea",
-        "label": "Company options（每行一个值）",
-        "info": "用于 Job Post 的「公司」下拉候选项。每行一个选项值。",
+        "id": "header_menu_html",
+        "type": "html",
+        "label": "t:schema.custom_html.settings.header_menu_html.label",
+        "info": "t:schema.custom_html.settings.header_menu_html.info",
         "rows": 6,
-        "default": "Acme Inc.\nMedium Inc.\nBeta Labs"
+        "placeholder": "t:schema.custom_html.settings.header_menu_html.placeholder"
       },
       {
-        "id": "location_options",
-        "type": "textarea",
-        "label": "Location options（每行一个值）",
-        "info": "用于 Job Post 的「地点」下拉候选项。每行一个选项值。",
+        "id": "footer_menu_html",
+        "type": "html",
+        "label": "t:schema.custom_html.settings.footer_menu_html.label",
+        "info": "t:schema.custom_html.settings.footer_menu_html.info",
         "rows": 6,
-        "default": "Remote\nShanghai\nLondon\nShenzhen"
-      },
-      {
-        "id": "salary_options",
-        "type": "textarea",
-        "label": "Salary options（每行一个值）",
-        "info": "用于 Job Post 的「薪资」下拉候选项。每行一个选项值。",
-        "rows": 6,
-        "default": "Negotiable\n$60K - $90K\n$75K - $100K\n$100K - $170K"
-      },
-      {
-        "id": "employment_type_options",
-        "type": "textarea",
-        "label": "Employment type options（每行一个值）",
-        "info": "用于 Job Post 的「类型」下拉候选项。每行一个选项值。",
-        "rows": 6,
-        "default": "Full-time\nPart-time\nInternship\nContract"
+        "placeholder": "t:schema.custom_html.settings.footer_menu_html.placeholder"
       }
     ]
   }
 ]
-

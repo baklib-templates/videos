@@ -1,0 +1,16 @@
+{%- assign ds = seconds | default: 0 | plus: 0 -%}
+{%- if ds == 0 -%}
+{%- else -%}
+{%- assign h = ds | divided_by: 3600 -%}
+{%- assign m = ds | modulo: 3600 | divided_by: 60 -%}
+{%- assign s = ds | modulo: 60 -%}
+{%- if h > 0 -%}
+  {%- if m > 0 -%}
+    {{ h }} hr {{ m }} min
+  {%- else -%}
+    {{ h }} hr
+  {%- endif -%}
+{%- else -%}
+  {{ m }}:{% if s < 10 %}0{% endif %}{{ s }}
+{%- endif -%}
+{%- endif -%}

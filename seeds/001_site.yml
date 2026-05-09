@@ -1,9 +1,8 @@
 site:
-  language: "zh-CN"
-  time_zone: "Asia/Shanghai"
+  language: "en"
+  time_zone: "America/Los_Angeles"
   favicon: ""
   settings:
-    brand_name: "Jobs"
-    brand_slogan: "专业级企业雇主品牌与招聘门户"
-        cta_label: "Apply now"
-
+    brand_name: "Compass"
+    brand_slogan: "A comprehensive journey that helps you navigate uncertainty and make choices aligned with your values and goals."
+    hero_background_image: "images/theme/hero-background.png"
