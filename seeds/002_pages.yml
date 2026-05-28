@@ -15,25 +15,22 @@ pages:
           template_name: page
           settings:
             description: "A practical map for navigating the illusion that you actually have any agency at all."
-            video_url: "https://assets.tailwindcss.com/templates/compass/landscape-of-choice.mp4"
+            external_video_url: "https://assets.tailwindcss.com/templates/compass/landscape-of-choice.mp4"
             thumb_image_url: "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-01.png"
-            duration_seconds: 876
             content: "preset:lesson-body.html"
         - name: "The Paradox of Agency"
           slug: paradox-of-agency
           template_name: page
           settings:
             description: "Explore whether you're living your life or just reacting to everyone else's."
-            duration_seconds: 0
             content: "preset:lesson-body.html"
         - name: "Liberation from Regret"
           slug: liberation-from-regret
           template_name: page
           settings:
             description: "If no alternative choice was ever possible, regret becomes logically unnecessary."
-            video_url: "https://assets.tailwindcss.com/templates/compass/liberation-from-regret.mp4"
+            external_video_url: "https://assets.tailwindcss.com/templates/compass/liberation-from-regret.mp4"
             thumb_image_url: "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-02.png"
-            duration_seconds: 947
             content: "preset:lesson-body.html"
 
     - name: "Direction: Choosing a Path"
@@ -47,9 +44,8 @@ pages:
           template_name: page
           settings:
             description: "The causes acting on you can give you insight into where they might take you."
-            video_url: "https://assets.tailwindcss.com/templates/compass/mapping-causal-factors.mp4"
+            external_video_url: "https://assets.tailwindcss.com/templates/compass/mapping-causal-factors.mp4"
             thumb_image_url: "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-03.png"
-            duration_seconds: 892
             content: "preset:lesson-body.html"
 
     - name: Interviews
@@ -62,21 +58,19 @@ pages:
           slug: annie-king
           template_name: page
           settings:
-            subtitle: "Interview"
-            intro: "Annie King shares her approach to life planning through her Legacy Tracker system and the art of scheduled spontaneity."
-            video_url: "https://assets.tailwindcss.com/templates/compass/annie-king-1080p.mp4"
+            title: "Interview"
+            description: "Annie King shares her approach to life planning through her Legacy Tracker system and the art of scheduled spontaneity."
+            external_video_url: "https://assets.tailwindcss.com/templates/compass/annie-king-1080p.mp4"
             thumb_image_url: "https://assets.tailwindcss.com/templates/compass/annie-king-video-thumbnail.png"
-            duration_seconds: 2570
-            chapters_html: "preset:annie-chapters.html"
-            transcript_html: "preset:annie-transcript.html"
             content: "<h2>Highlights</h2><p>Select a chapter to jump in the video, or read the transcript below.</p>"
+            protected_content: "<h2>Member notes</h2><p>Download the interview worksheet and bonus prompts after logging in.</p>"
         - name: "Dr. Nolan Grayson"
           slug: nolan-grayson
           template_name: page
           settings:
-            subtitle: "Is Quantum Nirvana the key to true freedom?"
-            intro: "Dr. Nolan Grayson explores quantum determinism and the illusion of free will."
-            video_url: "https://assets.tailwindcss.com/templates/compass/nolan-grayson-1080p.mp4"
+            title: "Is Quantum Nirvana the key to true freedom?"
+            description: "Dr. Nolan Grayson explores quantum determinism and the illusion of free will."
+            external_video_url: "https://assets.tailwindcss.com/templates/compass/nolan-grayson-1080p.mp4"
             thumb_image_url: "https://assets.tailwindcss.com/templates/compass/nolan-grayson-video-thumbnail.png"
-            duration_seconds: 3480
             content: "<h2>Highlights</h2><p>Discussion of parallel outcomes and perceived agency.</p>"
+            protected_content: "<h2>Member notes</h2><p>Includes extended Q&A and reading list for authenticated users.</p>"

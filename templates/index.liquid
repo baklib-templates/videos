@@ -21,36 +21,30 @@
 {%- endif -%}
 
 {%- capture nav_breadcrumbs -%}
-<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
-  <a href="{{ site.index_path }}" class="hover:text-primary">{{ 'theme.nav.home' | t: 'Home' }}</a>
-  <span class="text-base-content/30">/</span>
-  <span class="font-medium text-base-content">{{ 'theme.index.overview' | t: 'Overview' }}</span>
-</nav>
+  {% render 'breadrumb', current_label: ('theme.index.overview' | t: 'Overview') %}
 {%- endcapture -%}
 
 {% render 'navbar', breadcrumbs: nav_breadcrumbs %}
 
 <main class="grow px-4 sm:px-6">
   <div class="relative mx-auto max-w-7xl">
-    {%- assign default_hero_rel = 'images/theme/hero-background.png' | asset_url -%}
-    <div class="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl sm:h-[22rem] md:h-[28rem] lg:-inset-x-4 lg:h-[32rem]">
+    {%- assign default_hero_url = 'images/hero-background.png' | asset_url -%}
+    <div class="absolute -inset-x-2 top-0 z-0 h-80 overflow-hidden rounded-t-2xl sm:h-[22rem] md:h-[28rem] lg:-inset-x-4 lg:h-[32rem]">
       <img
-        src="{{ site.settings.hero_background_image | default: default_hero_rel }}"
+        src="{{ site.settings.hero_image_url | default: default_hero_url }}"
         alt=""
-        class="absolute inset-0 h-full w-full object-cover object-center opacity-40"
-        width="1200"
-        height="675"
+        class="absolute inset-0 h-full w-full object-cover object-center opacity-100"
         loading="eager"
       />
       <div
-        class="absolute inset-0 bg-gradient-to-r from-base-100/90 via-base-100/40 to-transparent"
+        class="absolute inset-0 bg-linear-to-r from-base-100/90 via-base-100/40 to-transparent"
         aria-hidden="true"
       ></div>
-      <div class="absolute inset-0 rounded-t-2xl outline outline-1 -outline-offset-1 outline-base-300/30"></div>
+      <div class="absolute inset-0 rounded-t-2xl outline-1 -outline-offset-1 outline-base-300/30"></div>
     </div>
 
     <div class="mx-auto max-w-6xl">
-      <div class="relative px-4 pb-10 pt-48 lg:py-24">
+      <div class="relative z-10 px-4 pb-10 pt-8 lg:pt-48 lg:py-24">
         <div class="h-8 text-base-content">{% render 'logo', svg_class: 'h-8 w-auto text-base-content' %}</div>
         <h1 class="sr-only">{{ 'theme.index.sr_course_overview' | t: 'Course overview' }}</h1>
         <p class="mt-7 max-w-lg text-pretty text-base/7 text-base-content/70">
@@ -87,7 +81,7 @@
         {%- endif -%}
       </div>
 
-      <div class="grid grid-cols-1 gap-y-16 pb-10 sm:px-4">
+      <div class="relative z-10 grid grid-cols-1 gap-y-16 pb-10 sm:px-4 bg-white rounded-t-2xl">
         {%- assign part_idx = 0 -%}
         {%- if root -%}
           {%- for mod in root.children_in_list -%}

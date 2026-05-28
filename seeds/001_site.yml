@@ -3,6 +3,8 @@ site:
   time_zone: "America/Los_Angeles"
   favicon: ""
   settings:
-    brand_name: "Compass"
+    brand_name: "Compass Video Course"
     brand_slogan: "A comprehensive journey that helps you navigate uncertainty and make choices aligned with your values and goals."
-    hero_background_image: "images/theme/hero-background.png"
+    head_html: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/daisyui@5.5.20/dist/full.min.css'>"
+    header_menu_html: "<a href='/'>Home</a> <a href='/about'>About</a> <a href='/contact'>Contact</a>"
+    footer_menu_html: "<a href='/terms'>Terms</a> <a href='/privacy'>Privacy</a>"

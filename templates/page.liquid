@@ -29,9 +29,28 @@
   {%- endif -%}
 {%- endfor -%}
 
-{%- assign vid = page.settings.video_asset | presence -%}
-{%- if vid == blank -%}
-  {%- assign vid = page.settings.video_url | presence -%}
+{%- assign video_asset_url = page.settings.video_asset_url | presence -%}
+{%- assign external_video_url = page.settings.external_video_url | presence -%}
+{%- assign external_embed_url = external_video_url -%}
+{%- assign is_external_embed = false -%}
+{%- if video_asset_url == blank and external_video_url != blank -%}
+  {%- if external_video_url contains 'youtube.com/watch' and external_video_url contains 'v=' -%}
+    {%- assign youtube_id = external_video_url | split: 'v=' | last | split: '&' | first -%}
+    {%- assign external_embed_url = 'https://www.youtube.com/embed/' | append: youtube_id -%}
+    {%- assign is_external_embed = true -%}
+  {%- elsif external_video_url contains 'youtu.be/' -%}
+    {%- assign youtube_id = external_video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+    {%- assign external_embed_url = 'https://www.youtube.com/embed/' | append: youtube_id -%}
+    {%- assign is_external_embed = true -%}
+  {%- elsif external_video_url contains 'vimeo.com/' -%}
+    {%- if external_video_url contains 'player.vimeo.com/video/' -%}
+      {%- assign external_embed_url = external_video_url -%}
+    {%- else -%}
+      {%- assign vimeo_id = external_video_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+      {%- assign external_embed_url = 'https://player.vimeo.com/video/' | append: vimeo_id -%}
+    {%- endif -%}
+    {%- assign is_external_embed = true -%}
+  {%- endif -%}
 {%- endif -%}
 {%- assign poster = page.settings.thumb_image_url | presence -%}
 
@@ -51,64 +70,63 @@
 
 <main class="grow px-4 sm:px-6">
   <div class="mx-auto max-w-7xl">
-    {%- if vid != blank -%}
-      <div class="-mx-2 sm:-mx-4" data-controller="video-player">
-        <div
-          data-video-player-target="container"
-          class="group aspect-video w-full rounded-2xl bg-base-200"
-        >
-          <video
-            id="lesson-video"
-            data-video-player-target="video"
-            class="aspect-video w-full rounded-2xl sm:group-data-offscreen:data-playing:fixed sm:group-data-offscreen:data-playing:bottom-4 sm:group-data-offscreen:data-playing:right-4 sm:group-data-offscreen:data-playing:z-10 sm:group-data-offscreen:data-playing:max-w-md sm:group-data-offscreen:data-playing:rounded-xl sm:group-data-offscreen:data-playing:shadow-lg"
-            src="{{ vid }}"
-            poster="{{ poster }}"
-            preload="metadata"
-            controls
-            playsinline
-          ></video>
+    {%- if video_asset_url != blank or external_video_url != blank -%}
+      {%- if is_external_embed -%}
+        <div class="-mx-2 sm:-mx-4">
+          <div class="group aspect-video w-full rounded-2xl bg-base-200">
+            <iframe
+              class="aspect-video w-full rounded-2xl"
+              src="{{ external_embed_url }}"
+              title="{{ page.link_text | default: page.name }}"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
-      </div>
+      {%- else -%}
+        <div class="-mx-2 sm:-mx-4" data-controller="video-player">
+          <div
+            data-video-player-target="container"
+            class="group aspect-video w-full rounded-2xl bg-base-200"
+          >
+            <video
+              id="lesson-video"
+              data-video-player-target="video"
+              class="aspect-video w-full rounded-2xl sm:group-data-offscreen:data-playing:fixed sm:group-data-offscreen:data-playing:bottom-4 sm:group-data-offscreen:data-playing:right-4 sm:group-data-offscreen:data-playing:z-10 sm:group-data-offscreen:data-playing:max-w-md sm:group-data-offscreen:data-playing:rounded-xl sm:group-data-offscreen:data-playing:shadow-lg"
+              src="{{ video_asset_url | default: external_video_url }}"
+              poster="{{ poster }}"
+              preload="metadata"
+              controls
+              playsinline
+            ></video>
+          </div>
+        </div>
+      {%- endif -%}
     {%- endif -%}
 
     <div class="mx-auto flex max-w-2xl gap-x-10 py-10 sm:py-14 lg:max-w-5xl">
       <div class="w-full flex-1">
-        {%- if page.settings.subtitle != blank -%}
-          <p class="text-sm/7 font-semibold text-base-content/60">{{ page.settings.subtitle }}</p>
+        {%- if page.settings.title != blank -%}
+          <p class="text-sm/7 font-semibold text-base-content/60">{{ page.settings.title }}</p>
         {%- endif -%}
         <h1 class="mt-2 text-3xl tracking-tight text-base-content">{{ page.link_text | default: page.name }}</h1>
-        {%- if page.settings.intro != blank -%}
-          <p class="mt-4 text-base/7 text-base-content/70">{{ page.settings.intro }}</p>
-        {%- endif -%}
-        {%- assign ds = page.settings.duration_seconds | default: 0 | plus: 0 -%}
-        {%- if ds > 0 -%}
-          <div class="mt-4 flex items-center gap-x-2 text-sm/7 font-semibold text-base-content">
-            <i data-lucide="clock-3" class="h-5 w-5 stroke-base-content/40" aria-hidden="true"></i>
-            {% render 'duration_label', seconds: ds %}
-          </div>
-        {%- endif -%}
-
-        {%- if page.settings.chapters_html != blank -%}
-          <div class="mt-12">
-            <h2 class="border-b border-base-300/20 pb-4 text-2xl font-medium tracking-tight text-base-content">{{ 'theme.page.chapters' | t: 'Chapters' }}</h2>
-            <div class="mt-8 grid grid-cols-[auto_1fr] gap-x-6 gap-y-4">
-              {{ page.settings.chapters_html | raw }}
-            </div>
-          </div>
-        {%- endif -%}
-
-        {%- if page.settings.transcript_html != blank -%}
-          <div class="mt-12">
-            <h2 class="border-b border-base-300/20 pb-4 text-2xl font-medium tracking-tight text-base-content">{{ 'theme.page.transcript' | t: 'Transcript' }}</h2>
-            <div class="mt-8 space-y-4 text-sm/7 text-base-content/70">
-              {{ page.settings.transcript_html | raw }}
-            </div>
-          </div>
+        {%- if page.settings.description != blank -%}
+          <p class="mt-4 text-base/7 text-base-content/70">{{ page.settings.description }}</p>
         {%- endif -%}
 
         <div id="content" class="prose mt-10 max-w-none">
           {{ page.settings.content }}
         </div>
+        {%- if current_user and page.settings.protected_content != blank -%}
+          <div class="mt-12 border-t border-base-300/20 pt-8">
+            <h2 class="text-2xl font-medium tracking-tight text-base-content">{{ 'theme.page.protected_content' | t: 'Protected content' }}</h2>
+            <div class="prose mt-6 max-w-none">
+              {{ page.settings.protected_content }}
+            </div>
+          </div>
+        {%- endif -%}
 
         <div class="mt-16 border-t border-base-300/20 pt-8">
           {%- if next_lesson_path != blank -%}
@@ -142,23 +160,22 @@
 {% schema %}
   {
     "name": "Lesson / detail page",
-    "description": "Video + prose + optional chapters & transcript",
+    "description": "Video + prose + optional protected section",
     "thumb_url": "images/theme/preview-page.png",
     "preview_image_urls": ["images/theme/preview-page.png"],
     "sub_page_templates": [],
     "settings": [
-      { "id": "subtitle", "type": "text", "label": "Subtitle (e.g. Interview)" },
-      { "id": "intro", "type": "textarea", "label": "Intro", "to_markdown": true },
+      { "id": "title", "type": "text", "label": "Title (e.g. Interview)" },
       { "id": "description", "type": "textarea", "label": "Short description", "to_markdown": true },
       {
-        "id": "video_asset",
+        "id": "video_asset_url",
         "type": "video_picker",
         "label": "Video asset",
         "ratio": "16:9",
         "width": 960,
-        "info": "Select a video from the asset library. If not set, Video URL below will be used."
+        "info": "Select a video from the asset library. If not set, External video URL below will be used."
       },
-      { "id": "video_url", "type": "text", "label": "Video URL (fallback)" },
+      { "id": "external_video_url", "type": "text", "label": "External video URL (fallback)" },
       {
         "id": "thumb_image_url",
         "type": "image_picker",
@@ -167,18 +184,8 @@
         "label": "Poster image",
         "info": "Used as the video poster and list thumbnail."
       },
-      {
-        "id": "duration_seconds",
-        "type": "number",
-        "label": "Duration (seconds)",
-        "min": 0,
-        "max": 864000,
-        "step": 1,
-        "default": 0
-      },
-      { "id": "chapters_html", "type": "html", "label": "Chapters HTML (optional)" },
-      { "id": "transcript_html", "type": "html", "label": "Transcript HTML (optional)" },
-      { "id": "content", "type": "richtext", "label": "Body", "to_markdown": true }
+      { "id": "content", "type": "richtext", "label": "Body", "to_markdown": true },
+      { "id": "protected_content", "type": "richtext", "label": "Protected content", "to_markdown": true }
     ]
   }
 {% endschema %}
