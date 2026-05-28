@@ -1,0 +1,63 @@
+<main class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+  <article class="prose max-w-none">
+    <h1>Video Course Theme Quick Guide</h1>
+    <p>Fast onboarding for editors and developers.</p>
+
+    <h2>Template Info</h2>
+    <ul>
+      <li><strong>Name:</strong> videos</li>
+      <li><strong>Description:</strong> A video course theme with module lists, lesson pages, and interview grid pages.</li>
+      <li><strong>Git:</strong> <code>git@github.com:baklib-templates/videos.git</code></li>
+    </ul>
+
+    <h2>For Content Managers</h2>
+    <h3>Start in 3 steps</h3>
+    <ol>
+      <li>
+        Configure site settings:
+        <code>brand_name</code>, <code>brand_slogan</code>, <code>hero_image_url</code>,
+        <code>head_html</code>, <code>header_menu_html</code>, <code>footer_menu_html</code>.
+      </li>
+      <li>
+        Build pages in this order:
+        <code>index</code> (home) -> <code>channel</code> or <code>channel.grid</code> -> <code>page</code>.
+      </li>
+      <li>
+        Fill lesson page fields:
+        <code>title</code>, <code>description</code>, <code>video_asset_url</code> or <code>external_video_url</code>,
+        <code>thumb_image_url</code>, <code>content</code>, <code>protected_content</code>.
+      </li>
+    </ol>
+
+    <h3>Important notes</h3>
+    <ul>
+      <li>Use English content by default.</li>
+      <li>Sidebar outline comes from pages under <code>channel</code>.</li>
+      <li><code>protected_content</code> is visible only to logged-in users.</li>
+    </ul>
+
+    <h2>For Template Developers</h2>
+    <h3>Schema overview</h3>
+    <ul>
+      <li><strong>index</strong>: allows child templates <code>channel</code>, <code>channel.grid</code>.</li>
+      <li><strong>channel</strong>: one field <code>description</code>, children use <code>page</code>.</li>
+      <li><strong>channel.grid</strong>: one field <code>description</code>, children use <code>page</code>.</li>
+      <li><strong>page</strong>: lesson/detail fields for title, video, image, and rich text content.</li>
+    </ul>
+
+    <h3>Nesting and style</h3>
+    <ul>
+      <li>Main flow: <code>layout/theme</code> -> <code>shell_open</code> -> page template -> <code>footer</code> -> <code>shell_close</code>.</li>
+      <li>UI stack: Tailwind v4 + DaisyUI semantic colors + Turbo + Stimulus + Alpine.</li>
+      <li>Runtime colors are mapped in <code>snippets/theme_runtime_colors</code>.</li>
+    </ul>
+
+    <h3>Developer notes</h3>
+    <ul>
+      <li>Snippet file names start with underscore, render names do not.</li>
+      <li>Keep in-frame navigation attributes on internal links when needed.</li>
+      <li>After editing files in <code>src</code>, rebuild assets before packaging.</li>
+      <li>Do not place Liquid syntax examples directly in this tutorial page to avoid runtime parsing.</li>
+    </ul>
+  </article>
+</main>
