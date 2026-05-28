@@ -3,8 +3,8 @@
 <turbo-stream action="append" target="js--body">
   <template>
     <div class="fixed left-1/2 bottom-6 z-50 -translate-x-1/2" id="js--jobs-feedback-toast" x-data="" x-init="setTimeout(() => { $el.remove() }, 4000)">
-      <div class="card px-4 py-3 text-sm text-slate-800">
-        <span class="font-semibold">{{ success | default: 'Submitted successfully' }}</span>
+      <div class="card border border-success/20 bg-base-100 px-4 py-3 text-sm text-base-content">
+        <span class="font-semibold">{{ success | default: ('theme.feedback.success_title' | t: 'Submitted successfully') }}</span>
       </div>
     </div>
   </template>

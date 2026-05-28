@@ -5,8 +5,8 @@
         © {{ 'now' | date: '%Y' }} {{ site.settings.brand_name | default: site.name }}
       </div>
       <div class="flex flex-wrap items-center gap-4">
-        <a class="hover:text-primary" href="#">Terms</a>
-        <a class="hover:text-primary" href="#">Privacy</a>
+        <a class="hover:text-primary" href="#">{{ 'theme.footer.terms' | t: 'Terms' }}</a>
+        <a class="hover:text-primary" href="#">{{ 'theme.footer.privacy' | t: 'Privacy' }}</a>
       </div>
     </div>
   </div>

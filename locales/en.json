@@ -1,0 +1,55 @@
+{
+  "theme": {
+    "nav": {
+      "home": "Home",
+      "create_post": "Create post",
+      "profile": "Profile",
+      "logout": "Log out",
+      "join": "Join"
+    },
+    "index": {
+      "overview": "Overview",
+      "sr_course_overview": "Course overview",
+      "modules": "modules",
+      "lessons": "lessons",
+      "start_course": "Start the course",
+      "part_prefix": "Part "
+    },
+    "page": {
+      "interviews": "Interviews",
+      "chapters": "Chapters",
+      "transcript": "Transcript",
+      "up_next": "Up next",
+      "interviews_description": "Explore interviews with industry experts and thought leaders.",
+      "on_this_page": "On this page"
+    },
+    "channel": {
+      "empty": "No lessons yet."
+    },
+    "grid": {
+      "empty": "No items yet."
+    },
+    "feedback": {
+      "success_title": "Submission successful",
+      "success_message": "Your submission has been received.",
+      "error_title": "Submission failed",
+      "error_message": "Please try again later.",
+      "back_home": "Back to home"
+    },
+    "sidebar": {
+      "empty": "No pages."
+    },
+    "footer": {
+      "terms": "Terms",
+      "privacy": "Privacy"
+    },
+    "a11y": {
+      "open_course_outline": "Open course outline",
+      "open_sidebar": "Open sidebar",
+      "toggle_sidebar": "Toggle sidebar",
+      "course": "Course",
+      "menu": "Menu",
+      "close": "Close"
+    }
+  }
+}

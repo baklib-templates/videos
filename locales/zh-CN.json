@@ -1,0 +1,55 @@
+{
+  "theme": {
+    "nav": {
+      "home": "首页",
+      "create_post": "发布内容",
+      "profile": "个人资料",
+      "logout": "退出登录",
+      "join": "加入"
+    },
+    "index": {
+      "overview": "概览",
+      "sr_course_overview": "课程概览",
+      "modules": "模块",
+      "lessons": "课时",
+      "start_course": "开始学习",
+      "part_prefix": "Part "
+    },
+    "page": {
+      "interviews": "访谈",
+      "chapters": "章节",
+      "transcript": "逐字稿",
+      "up_next": "下一节",
+      "interviews_description": "浏览行业专家与思想领袖的访谈内容。",
+      "on_this_page": "本页目录"
+    },
+    "channel": {
+      "empty": "暂无课时。"
+    },
+    "grid": {
+      "empty": "暂无内容。"
+    },
+    "feedback": {
+      "success_title": "提交成功",
+      "success_message": "我们已收到你的提交。",
+      "error_title": "提交失败",
+      "error_message": "请稍后重试。",
+      "back_home": "返回首页"
+    },
+    "sidebar": {
+      "empty": "暂无页面。"
+    },
+    "footer": {
+      "terms": "条款",
+      "privacy": "隐私"
+    },
+    "a11y": {
+      "open_course_outline": "打开课程目录",
+      "open_sidebar": "打开侧边栏",
+      "toggle_sidebar": "切换侧边栏",
+      "course": "课程",
+      "menu": "菜单",
+      "close": "关闭"
+    }
+  }
+}

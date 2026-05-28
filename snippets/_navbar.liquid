@@ -13,17 +13,17 @@
       type="button"
       class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content xl:hidden"
       @click="$store.theme_shell.toggleMobileCourse()"
-      aria-label="Open course outline"
+      aria-label="{{ 'theme.a11y.open_course_outline' | t: 'Open course outline' }}"
     >
-      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+      <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
     </button>
     <button
       type="button"
       class="hidden rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content max-xl:hidden xl:group-data-sidebar-collapsed:flex"
       @click="$store.theme_shell.toggleSidebar()"
-      aria-label="Open sidebar"
+      aria-label="{{ 'theme.a11y.open_sidebar' | t: 'Open sidebar' }}"
     >
-      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+      <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
     </button>
     <div class="min-w-0 text-sm/6 text-base-content/70">
       {{ breadcrumbs }}
@@ -42,7 +42,7 @@
     {%- endif -%}
     {{ site.settings.header_menu_html }}
     {%- if current_user -%}
-      <a href="/s/new" class="btn btn-sm bg-primary text-white hover:bg-secondary">{{ 'buttons.create_post' | t }}</a>
+      <a href="/s/new" class="btn btn-sm btn-primary">{{ 'theme.nav.create_post' | t: 'Create post' }}</a>
       <div class="relative" x-data="{ open: false }">
         <button
           type="button"
@@ -52,8 +52,8 @@
           aria-expanded="false"
           :aria-expanded="open"
         >
-          <span>{{ 'generic.profile' | t }}</span>
-          <svg class="h-4 w-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          <span>{{ 'theme.nav.profile' | t: 'Profile' }}</span>
+          <i data-lucide="chevron-down" class="h-4 w-4 stroke-current" aria-hidden="true"></i>
         </button>
         <div
           class="absolute right-0 z-30 mt-2 min-w-48 rounded-md border border-base-300/20 bg-base-100 py-1 shadow-lg"
@@ -66,22 +66,20 @@
             {%- if current_user.image -%}
               <img src="{{ current_user.image }}" class="h-5 w-5 rounded-full" alt="">
             {%- else -%}
-              <svg class="h-5 w-5 rounded-full stroke-current text-base-content/60" viewBox="0 0 24 24" fill="none" stroke-width="1.5" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-              </svg>
+              <i data-lucide="circle-user-round" class="h-5 w-5 rounded-full text-base-content/60" aria-hidden="true"></i>
             {%- endif -%}
             <span class="truncate">{{ current_user.name }}</span>
           </div>
-          <a class="block px-4 py-2 text-sm text-base-content/80 hover:bg-base-content/5" href="{{ current_user.profile_url }}" target="_blank">{{ 'generic.profile' | t }}</a>
+          <a class="block px-4 py-2 text-sm text-base-content/80 hover:bg-base-content/5" href="{{ current_user.profile_url }}" target="_blank">{{ 'theme.nav.profile' | t: 'Profile' }}</a>
           {% form_tag 'sign_out' %}
-            <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-base-content/80 hover:bg-base-content/5">{{ 'buttons.logout' | t }}</button>
+            <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-base-content/80 hover:bg-base-content/5">{{ 'theme.nav.logout' | t: 'Log out' }}</button>
           {% endform_tag %}
         </div>
       </div>
     {%- else -%}
       {% form_tag 'sign_in_with_baklib' %}
         <input value="true" type="hidden" name="sign_up">
-        <input type="submit" value="{{ 'buttons.join' | t }}" class="btn bg-primary text-white hover:bg-secondary" data-disable-with=" ... ">
+        <input type="submit" value="{{ 'theme.nav.join' | t: 'Join' }}" class="btn btn-primary" data-disable-with=" ... ">
       {% endform_tag %}
     {%- endif -%}
   </nav>
@@ -89,9 +87,9 @@
     type="button"
     class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5 hover:text-base-content lg:hidden"
     @click="$store.theme_shell.toggleMobileNav()"
-    aria-label="Menu"
+    aria-label="{{ 'theme.a11y.menu' | t: 'Menu' }}"
   >
-    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+    <i data-lucide="menu" class="h-6 w-6" aria-hidden="true"></i>
   </button>
 </div>
 
@@ -113,8 +111,8 @@
   style="display: none;"
 >
   <div class="flex justify-end border-b border-base-300/20 p-4">
-    <button type="button" class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5" @click="$store.theme_shell.mobileNavOpen = false" aria-label="Close">
-      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    <button type="button" class="rounded-md p-2 text-base-content/60 hover:bg-base-content/5" @click="$store.theme_shell.mobileNavOpen = false" aria-label="{{ 'theme.a11y.close' | t: 'Close' }}">
+      <i data-lucide="x" class="h-5 w-5" aria-hidden="true"></i>
     </button>
   </div>
   <div class="flex flex-col gap-y-2 px-4 py-4">

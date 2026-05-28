@@ -6,8 +6,8 @@
     data-turbo-action="advance"
   >
     <p class="flex items-center gap-3 text-sm/7 text-base-content/60">
-      {{ label | default: 'Up next' }}
-      <svg class="h-4 w-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      {{ label | default: ('theme.page.up_next' | t: 'Up next') }}
+      <i data-lucide="chevron-right" class="h-4 w-4 stroke-current" aria-hidden="true"></i>
     </p>
     <p class="mt-3 text-base/7 font-medium text-base-content">{{ title }}</p>
     {%- if description != blank -%}

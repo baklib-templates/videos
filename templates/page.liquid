@@ -1,6 +1,6 @@
 {%- assign parent = page.parent -%}
 {%- assign interviews_path = '' -%}
-{%- assign interviews_title = 'Interviews' -%}
+{%- assign interviews_title = 'theme.page.interviews' | t: 'Interviews' -%}
 {%- assign root = site.pages['/'] -%}
 {%- if root -%}
   {%- for p in root.children_in_list -%}
@@ -37,7 +37,7 @@
 
 {%- capture nav_breadcrumbs -%}
 <nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
-  <a href="{{ site.index_path }}" class="hover:text-primary">Home</a>
+  <a href="{{ site.index_path }}" class="hover:text-primary">{{ 'theme.nav.home' | t: 'Home' }}</a>
   <span class="text-base-content/30">/</span>
   {%- if parent -%}
     <a href="{{ parent.path }}" class="max-md:hidden hover:text-primary" data-turbo-frame="main-content-frame" data-turbo-action="advance">{{ parent.link_text | default: parent.name }}</a>
@@ -83,14 +83,14 @@
         {%- assign ds = page.settings.duration_seconds | default: 0 | plus: 0 -%}
         {%- if ds > 0 -%}
           <div class="mt-4 flex items-center gap-x-2 text-sm/7 font-semibold text-base-content">
-            <svg class="h-5 w-5 stroke-base-content/40" viewBox="0 0 24 24" fill="none" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <i data-lucide="clock-3" class="h-5 w-5 stroke-base-content/40" aria-hidden="true"></i>
             {% render 'duration_label', seconds: ds %}
           </div>
         {%- endif -%}
 
         {%- if page.settings.chapters_html != blank -%}
           <div class="mt-12">
-            <h2 class="border-b border-base-300/20 pb-4 text-2xl font-medium tracking-tight text-base-content">Chapters</h2>
+            <h2 class="border-b border-base-300/20 pb-4 text-2xl font-medium tracking-tight text-base-content">{{ 'theme.page.chapters' | t: 'Chapters' }}</h2>
             <div class="mt-8 grid grid-cols-[auto_1fr] gap-x-6 gap-y-4">
               {{ page.settings.chapters_html | raw }}
             </div>
@@ -99,7 +99,7 @@
 
         {%- if page.settings.transcript_html != blank -%}
           <div class="mt-12">
-            <h2 class="border-b border-base-300/20 pb-4 text-2xl font-medium tracking-tight text-base-content">Transcript</h2>
+            <h2 class="border-b border-base-300/20 pb-4 text-2xl font-medium tracking-tight text-base-content">{{ 'theme.page.transcript' | t: 'Transcript' }}</h2>
             <div class="mt-8 space-y-4 text-sm/7 text-base-content/70">
               {{ page.settings.transcript_html | raw }}
             </div>
@@ -116,14 +116,14 @@
               href: next_lesson_path,
               title: next_lesson_title,
               description: next_lesson_desc,
-              label: 'Up next'
+              label: ('theme.page.up_next' | t: 'Up next')
             %}
           {%- elsif parent and parent.template_name == 'channel' and interviews_path != blank -%}
             {% render 'next_page_link',
               href: interviews_path,
               title: interviews_title,
-              description: 'Explore interviews with industry experts and thought leaders.',
-              label: 'Up next'
+              description: ('theme.page.interviews_description' | t: 'Explore interviews with industry experts and thought leaders.'),
+              label: ('theme.page.up_next' | t: 'Up next')
             %}
           {%- endif -%}
         </div>
@@ -131,7 +131,7 @@
 
       <aside class="hidden w-64 shrink-0 lg:block" data-controller="toc" data-toc-root-id-value="content">
         <nav class="sticky top-16">
-          <h2 class="text-sm/6 font-semibold text-base-content">On this page</h2>
+          <h2 class="text-sm/6 font-semibold text-base-content">{{ 'theme.page.on_this_page' | t: 'On this page' }}</h2>
           <ul class="mt-3 flex flex-col gap-3 border-l border-base-300/30 text-sm/6 text-base-content/70" data-toc-list></ul>
         </nav>
       </aside>
@@ -153,19 +153,19 @@
       {
         "id": "video_asset",
         "type": "video_picker",
-        "label": "视频资源",
+        "label": "Video asset",
         "ratio": "16:9",
         "width": 960,
-        "info": "从资源库选择视频资源。若未选择，将使用下方 Video URL。"
+        "info": "Select a video from the asset library. If not set, Video URL below will be used."
       },
-      { "id": "video_url", "type": "text", "label": "Video URL（外链兜底）" },
+      { "id": "video_url", "type": "text", "label": "Video URL (fallback)" },
       {
         "id": "thumb_image_url",
         "type": "image_picker",
         "ratio": "16:9",
         "width": 400,
-        "label": "封面图",
-        "info": "用于视频 poster 与列表缩略图。"
+        "label": "Poster image",
+        "info": "Used as the video poster and list thumbnail."
       },
       {
         "id": "duration_seconds",

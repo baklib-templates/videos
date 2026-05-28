@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "videos",
     "theme_label": "Video Course",
-    "theme_description": "视频课程站点主题：侧栏大纲、课时详情、访谈网格列表，参考 Tailwind Plus 课程类 UI。",
+    "theme_description": "Video course theme with a sidebar outline, lesson detail pages, and interview grids inspired by AI-native SaaS learning products.",
     "theme_version": "0.1.0",
     "theme_syntax_version": "v2",
     "theme_scope": "cms",
@@ -67,7 +67,7 @@
           }
         },
         "fashion": {
-          "name": "时尚",
+        "name": "Fashion",
           "colors": {
             "--theme-color-base-100": "0 0% 100%",
             "--theme-color-base-200": "0 0% 96%",
@@ -115,18 +115,18 @@
     }
   },
   {
-    "name": "站点设置",
+    "name": "Site settings",
     "settings": [
       {
         "id": "brand_name",
         "type": "text",
-        "label": "品牌名称",
+        "label": "Brand name",
         "default": "Compass"
       },
       {
         "id": "brand_slogan",
         "type": "textarea",
-        "label": "课程简介（首页展示）",
+        "label": "Course summary (homepage)",
         "default": "A comprehensive journey that helps you navigate uncertainty and make choices aligned with your values and goals.",
         "rows": 3
       },
@@ -135,37 +135,37 @@
         "type": "image_picker",
         "ratio": "16:9",
         "width": 240,
-        "label": "首页 Hero 背景图",
+        "label": "Homepage hero background",
         "default": "images/theme/hero-background.png"
       }
     ]
   },
   {
-    "name": "t:schema.custom_html.name",
+    "name": "Custom HTML",
     "settings": [
       {
         "id": "head_html",
         "type": "html",
-        "label": "t:schema.custom_html.settings.head_html.label",
-        "info": "t:schema.custom_html.settings.head_html.info",
+        "label": "Head HTML",
+        "info": "Injected into the <head> section.",
         "rows": 10,
-        "placeholder": "t:schema.custom_html.settings.head_html.placeholder"
+        "placeholder": "<!-- Add analytics or verification scripts -->"
       },
       {
         "id": "header_menu_html",
         "type": "html",
-        "label": "t:schema.custom_html.settings.header_menu_html.label",
-        "info": "t:schema.custom_html.settings.header_menu_html.info",
+        "label": "Header menu HTML",
+        "info": "Rendered in the desktop top navigation.",
         "rows": 6,
-        "placeholder": "t:schema.custom_html.settings.header_menu_html.placeholder"
+        "placeholder": "<a href=\"/pricing\">Pricing</a>"
       },
       {
         "id": "footer_menu_html",
         "type": "html",
-        "label": "t:schema.custom_html.settings.footer_menu_html.label",
-        "info": "t:schema.custom_html.settings.footer_menu_html.info",
+        "label": "Footer menu HTML",
+        "info": "Rendered in the footer area.",
         "rows": 6,
-        "placeholder": "t:schema.custom_html.settings.footer_menu_html.placeholder"
+        "placeholder": "<a href=\"/terms\">Terms</a>"
       }
     ]
   }

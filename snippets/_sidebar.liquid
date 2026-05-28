@@ -1,6 +1,6 @@
 {%- assign root = site.pages['/'] -%}
 {%- if root == blank -%}
-  <p class="text-sm text-base-content/60">No pages.</p>
+  <p class="text-sm text-base-content/60">{{ 'theme.sidebar.empty' | t: 'No pages.' }}</p>
 {%- else -%}
   <div class="space-y-8">
     {%- for mod in root.children_in_list -%}

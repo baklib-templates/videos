@@ -1,10 +1,10 @@
 <main class="py-16">
   <div class="mx-auto max-w-2xl px-4 sm:px-6">
-    <div class="rounded-xl border border-red-500/30 bg-gray-900 p-8 text-center">
-      <div class="text-2xl font-semibold text-white">提交失败</div>
-      <p class="mt-3 text-gray-400">{{ errors | default: '请稍后重试。' }}</p>
+    <div class="rounded-xl border border-error/30 bg-base-200 p-8 text-center">
+      <div class="text-2xl font-semibold text-error">{{ 'theme.feedback.error_title' | t: 'Submission failed' }}</div>
+      <p class="mt-3 text-base-content/70">{{ errors | default: ('theme.feedback.error_message' | t: 'Please try again later.') }}</p>
       <div class="mt-6">
-        <a class="btn btn-outline" href="{{ site.index_path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance">返回首页</a>
+        <a class="btn btn-outline" href="{{ site.index_path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance">{{ 'theme.feedback.back_home' | t: 'Back to home' }}</a>
       </div>
     </div>
   </div>

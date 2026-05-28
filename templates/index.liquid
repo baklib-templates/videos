@@ -22,9 +22,9 @@
 
 {%- capture nav_breadcrumbs -%}
 <nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
-  <a href="{{ site.index_path }}" class="hover:text-primary">Home</a>
+  <a href="{{ site.index_path }}" class="hover:text-primary">{{ 'theme.nav.home' | t: 'Home' }}</a>
   <span class="text-base-content/30">/</span>
-  <span class="font-medium text-base-content">Overview</span>
+  <span class="font-medium text-base-content">{{ 'theme.index.overview' | t: 'Overview' }}</span>
 </nav>
 {%- endcapture -%}
 
@@ -32,7 +32,7 @@
 
 <main class="grow px-4 sm:px-6">
   <div class="relative mx-auto max-w-7xl">
-    {%- assign default_hero_rel = 'images/theme/hero-illustration.svg' | asset_url -%}
+    {%- assign default_hero_rel = 'images/theme/hero-background.png' | asset_url -%}
     <div class="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl sm:h-[22rem] md:h-[28rem] lg:-inset-x-4 lg:h-[32rem]">
       <img
         src="{{ site.settings.hero_background_image | default: default_hero_rel }}"
@@ -52,23 +52,23 @@
     <div class="mx-auto max-w-6xl">
       <div class="relative px-4 pb-10 pt-48 lg:py-24">
         <div class="h-8 text-base-content">{% render 'logo', svg_class: 'h-8 w-auto text-base-content' %}</div>
-        <h1 class="sr-only">Course overview</h1>
+        <h1 class="sr-only">{{ 'theme.index.sr_course_overview' | t: 'Course overview' }}</h1>
         <p class="mt-7 max-w-lg text-pretty text-base/7 text-base-content/70">
           {{ site.settings.brand_slogan }}
         </p>
         <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm/7 font-semibold text-base-content sm:gap-3">
           <div class="flex items-center gap-1.5">
-            <svg class="h-5 w-5 stroke-base-content/40" viewBox="0 0 24 24" fill="none" stroke-width="1.5" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-            {{ mod_count }} modules
+            <i data-lucide="book-open" class="h-5 w-5 stroke-base-content/40" aria-hidden="true"></i>
+            {{ mod_count }} {{ 'theme.index.modules' | t: 'modules' }}
           </div>
           <span class="hidden text-base-content/30 sm:inline">·</span>
           <div class="flex items-center gap-1.5">
-            <svg class="h-5 w-5 stroke-base-content/40" viewBox="0 0 24 24" fill="none" stroke-width="1.5" aria-hidden="true"><path d="M12 6v6l4 2"/></svg>
-            {{ lesson_count }} lessons
+            <i data-lucide="list" class="h-5 w-5 stroke-base-content/40" aria-hidden="true"></i>
+            {{ lesson_count }} {{ 'theme.index.lessons' | t: 'lessons' }}
           </div>
           <span class="hidden text-base-content/30 sm:inline">·</span>
           <div class="flex items-center gap-1.5">
-            <svg class="h-5 w-5 stroke-base-content/40" viewBox="0 0 24 24" fill="none" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <i data-lucide="clock-3" class="h-5 w-5 stroke-base-content/40" aria-hidden="true"></i>
             {% render 'duration_label', seconds: total_dur %}
           </div>
         </div>
@@ -80,8 +80,8 @@
               data-turbo-frame="main-content-frame"
               data-turbo-action="advance"
             >
-              <svg class="h-4 w-4 fill-primary-content" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-              Start the course
+              <i data-lucide="play" class="h-4 w-4" aria-hidden="true"></i>
+              {{ 'theme.index.start_course' | t: 'Start the course' }}
             </a>
           </div>
         {%- endif -%}
@@ -93,7 +93,8 @@
           {%- for mod in root.children_in_list -%}
             {%- if mod.template_name == 'channel' -%}
               {%- assign part_idx = part_idx | plus: 1 -%}
-              {%- assign part_label_str = 'Part ' | append: part_idx -%}
+              {%- assign part_prefix = 'theme.index.part_prefix' | t: 'Part ' -%}
+              {%- assign part_label_str = part_prefix | append: part_idx -%}
               {%- capture part_inner -%}
                 <div class="max-w-2xl">
                   <h2 class="text-pretty text-2xl/7 font-medium tracking-tight text-base-content">

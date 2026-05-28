@@ -2,7 +2,7 @@
 
 {%- capture nav_breadcrumbs -%}
 <nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
-  <a href="{{ site.index_path }}" class="hover:text-primary">Home</a>
+  <a href="{{ site.index_path }}" class="hover:text-primary">{{ 'theme.nav.home' | t: 'Home' }}</a>
   <span class="text-base-content/30">/</span>
   <span class="font-medium text-base-content">{{ page.link_text | default: page.name }}</span>
 </nav>
@@ -37,7 +37,7 @@
           %}
         </div>
       {%- else -%}
-        <div class="p-6 text-sm text-base-content/60">No lessons yet.</div>
+        <div class="p-6 text-sm text-base-content/60">{{ 'theme.channel.empty' | t: 'No lessons yet.' }}</div>
       {%- endfor -%}
     </div>
   </div>

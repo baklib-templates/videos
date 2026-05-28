@@ -1,6 +1,11 @@
 @config "../../tailwind.config.js";
 @import "tailwindcss";
 @import "./typography.css";
+@plugin "daisyui" {
+  themes: false;
+  exclude: scrollbar, rootcolor;
+  logs: false;
+}
 
 @theme inline {
   --font-sans: "InterVar", ui-sans-serif, system-ui, sans-serif;
@@ -25,8 +30,23 @@
 }
 
 @layer base {
+  :root {
+    --radius-selector: 2rem;
+    --radius-field: 0.5rem;
+    --radius-box: 1rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 2px;
+    --depth: 1;
+    --noise: 0;
+  }
+
   html {
     font-family: var(--font-sans);
+  }
+
+  .lucide {
+    @apply inline-block align-middle;
   }
 
   [x-cloak] {

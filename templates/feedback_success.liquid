@@ -1,10 +1,10 @@
 <main class="py-16">
   <div class="mx-auto max-w-2xl px-4 sm:px-6">
     <div class="card p-8 text-center">
-      <div class="text-2xl font-extrabold text-slate-900">提交成功</div>
-      <p class="mt-3 text-slate-600">{{ success | default: '我们已收到你的投递信息。' }}</p>
+      <div class="text-2xl font-extrabold text-base-content">{{ 'theme.feedback.success_title' | t: 'Submission successful' }}</div>
+      <p class="mt-3 text-base-content/70">{{ success | default: ('theme.feedback.success_message' | t: 'Your submission has been received.') }}</p>
       <div class="mt-6">
-        <a class="btn btn-primary" href="{{ site.index_path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance">返回首页</a>
+        <a class="btn btn-primary" href="{{ site.index_path }}" data-turbo-frame="main-content-frame" data-turbo-action="advance">{{ 'theme.feedback.back_home' | t: 'Back to home' }}</a>
       </div>
     </div>
   </div>

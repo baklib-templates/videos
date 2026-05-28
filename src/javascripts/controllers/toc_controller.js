@@ -23,8 +23,8 @@ export default class extends Controller {
         const indent = h.tagName === "H3" ? "pl-4" : ""
         const t = (h.textContent || "").trim()
         const safe = t.replace(/</g, "&lt;").replace(/>/g, "&gt;")
-        return `<li class="-ml-px border-l border-transparent pl-4 hover:border-gray-400 hover:text-gray-950 dark:hover:border-gray-400 dark:hover:text-white has-[a[aria-current=location]]:border-gray-950 dark:has-[a[aria-current=location]]:border-white">
-          <a href="#${h.id}" class="block text-sm/6 text-gray-700 dark:text-gray-400 ${indent}" aria-current="false" data-toc-anchor>${safe}</a>
+        return `<li class="-ml-px border-l border-transparent pl-4 hover:border-base-300 hover:text-base-content has-[a[aria-current=location]]:border-base-content">
+          <a href="#${h.id}" class="block text-sm/6 text-base-content/70 ${indent}" aria-current="false" data-toc-anchor>${safe}</a>
         </li>`
       })
       .join("")
@@ -72,9 +72,9 @@ export default class extends Controller {
       const on = a.getAttribute("href") === `#${current}`
       a.setAttribute("aria-current", on ? "location" : "false")
       if (on) {
-        a.classList.add("font-medium", "text-gray-950", "dark:text-white")
+        a.classList.add("font-medium", "text-base-content")
       } else {
-        a.classList.remove("font-medium", "text-gray-950", "dark:text-white")
+        a.classList.remove("font-medium", "text-base-content")
       }
     })
   }

@@ -2,10 +2,10 @@ import * as Turbo from "@hotwired/turbo"
 import { Application } from "@hotwired/stimulus"
 import Alpine from "alpinejs"
 import collapse from "@alpinejs/collapse"
+import { createIcons, icons } from "lucide"
 
 import VideoPlayerController from "./controllers/video_player_controller.js"
 import TocController from "./controllers/toc_controller.js"
-import VideoSeekController from "./controllers/video_seek_controller.js"
 
 window.Turbo = Turbo
 
@@ -13,7 +13,6 @@ const stimulus = Application.start()
 window.Stimulus = stimulus
 stimulus.register("video-player", VideoPlayerController)
 stimulus.register("toc", TocController)
-stimulus.register("video-seek", VideoSeekController)
 
 Alpine.store("theme_shell", {
   sidebarOpen: true,
@@ -33,6 +32,18 @@ Alpine.store("theme_shell", {
 window.Alpine = Alpine
 Alpine.plugin(collapse)
 Alpine.start()
+
+const renderLucideIcons = () => {
+  createIcons({ icons })
+}
+
+document.addEventListener("turbo:load", renderLucideIcons)
+document.addEventListener("turbo:frame-load", renderLucideIcons)
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderLucideIcons, { once: true })
+} else {
+  renderLucideIcons()
+}
 
 // Turbo: when navigating within main frame, reset scroll to top.
 document.addEventListener("turbo:frame-load", (event) => {
