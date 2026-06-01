@@ -1,7 +1,7 @@
 {%- assign items = page.children_in_list -%}
 
 {%- capture nav_breadcrumbs -%}
-<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
+<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="{{ 'theme.a11y.breadcrumb' | t: 'Breadcrumb' }}">
   <a href="{{ site.index_path }}" class="hover:text-primary">{{ 'theme.nav.home' | t: 'Home' }}</a>
   <span class="text-base-content/30">/</span>
   <span class="font-medium text-base-content">{{ page.link_text | default: page.name }}</span>
@@ -37,13 +37,13 @@
 
 {% schema %}
   {
-    "name": "Grid channel",
-    "description": "Video card grid (e.g. interviews)",
-    "thumb_url": "images/theme/preview-index.png",
-    "preview_image_urls": ["images/theme/preview-index.png"],
+    "name": "t:schema.templates.channel.grid.name",
+    "description": "t:schema.templates.channel.grid.description",
+    "thumb_url": "images/theme/${lang}/channel.grid_poster.png",
+    "preview_image_urls": ["images/theme/${lang}/channel.grid_poster.png"],
     "sub_page_templates": ["page"],
     "settings": [
-      { "id": "description", "type": "textarea", "label": "Description", "to_markdown": true }
+      { "id": "description", "type": "textarea", "label": "t:schema.templates.channel.grid.settings.description.label", "to_markdown": true }
     ]
   }
 {% endschema %}

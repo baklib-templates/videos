@@ -6,9 +6,9 @@
 {%- assign s = ds | modulo: 60 -%}
 {%- if h > 0 -%}
   {%- if m > 0 -%}
-    {{ h }} hr {{ m }} min
+    {{ h }} {{ 'theme.duration.hr' | t: 'hr' }} {{ m }} {{ 'theme.duration.min' | t: 'min' }}
   {%- else -%}
-    {{ h }} hr
+    {{ h }} {{ 'theme.duration.hr' | t: 'hr' }}
   {%- endif -%}
 {%- else -%}
   {{ m }}:{% if s < 10 %}0{% endif %}{{ s }}

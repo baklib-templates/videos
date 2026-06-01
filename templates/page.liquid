@@ -55,7 +55,7 @@
 {%- assign poster = page.settings.thumb_image_url | presence -%}
 
 {%- capture nav_breadcrumbs -%}
-<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
+<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="{{ 'theme.a11y.breadcrumb' | t: 'Breadcrumb' }}">
   <a href="{{ site.index_path }}" class="hover:text-primary">{{ 'theme.nav.home' | t: 'Home' }}</a>
   <span class="text-base-content/30">/</span>
   {%- if parent -%}
@@ -159,33 +159,33 @@
 
 {% schema %}
   {
-    "name": "Lesson / detail page",
-    "description": "Video + prose + optional protected section",
-    "thumb_url": "images/theme/preview-page.png",
-    "preview_image_urls": ["images/theme/preview-page.png"],
+    "name": "t:schema.templates.page.name",
+    "description": "t:schema.templates.page.description",
+    "thumb_url": "images/theme/${lang}/page_poster.png",
+    "preview_image_urls": ["images/theme/${lang}/page_poster.png"],
     "sub_page_templates": [],
     "settings": [
-      { "id": "title", "type": "text", "label": "Title (e.g. Interview)" },
-      { "id": "description", "type": "textarea", "label": "Short description", "to_markdown": true },
+      { "id": "title", "type": "text", "label": "t:schema.templates.page.settings.title.label" },
+      { "id": "description", "type": "textarea", "label": "t:schema.templates.page.settings.description.label", "to_markdown": true },
       {
         "id": "video_asset_url",
         "type": "video_picker",
-        "label": "Video asset",
+        "label": "t:schema.templates.page.settings.video_asset_url.label",
         "ratio": "16:9",
         "width": 960,
-        "info": "Select a video from the asset library. If not set, External video URL below will be used."
+        "info": "t:schema.templates.page.settings.video_asset_url.info"
       },
-      { "id": "external_video_url", "type": "text", "label": "External video URL (fallback)" },
+      { "id": "external_video_url", "type": "text", "label": "t:schema.templates.page.settings.external_video_url.label" },
       {
         "id": "thumb_image_url",
         "type": "image_picker",
         "ratio": "16:9",
         "width": 400,
-        "label": "Poster image",
-        "info": "Used as the video poster and list thumbnail."
+        "label": "t:schema.templates.page.settings.thumb_image_url.label",
+        "info": "t:schema.templates.page.settings.thumb_image_url.info"
       },
-      { "id": "content", "type": "richtext", "label": "Body", "to_markdown": true },
-      { "id": "protected_content", "type": "richtext", "label": "Protected content", "to_markdown": true }
+      { "id": "content", "type": "richtext", "label": "t:schema.templates.page.settings.content.label", "to_markdown": true },
+      { "id": "protected_content", "type": "richtext", "label": "t:schema.templates.page.settings.protected_content.label", "to_markdown": true }
     ]
   }
 {% endschema %}

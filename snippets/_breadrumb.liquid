@@ -2,7 +2,7 @@
 {%- assign crumb_home_label = home_label | default: ('theme.nav.home' | t: 'Home') -%}
 {%- assign crumb_current_label = current_label | default: '' -%}
 
-<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="Breadcrumb">
+<nav class="flex flex-wrap items-center gap-2 text-sm text-base-content/70" aria-label="{{ 'theme.a11y.breadcrumb' | t: 'Breadcrumb' }}">
   <a href="{{ crumb_home_path }}" class="hover:text-primary">{{ crumb_home_label }}</a>
   {%- if crumb_current_label != blank -%}
     <span class="text-base-content/30">/</span>

@@ -28,7 +28,7 @@
 
 <main class="grow px-4 sm:px-6">
   <div class="relative mx-auto max-w-7xl">
-    {%- assign default_hero_url = 'images/hero-background.png' | asset_url -%}
+    {%- assign default_hero_url = 'images/hero-background.jpg' | asset_url -%}
     <div class="absolute -inset-x-2 top-0 z-0 h-80 overflow-hidden rounded-t-2xl sm:h-[22rem] md:h-[28rem] lg:-inset-x-4 lg:h-[32rem]">
       <img
         src="{{ site.settings.hero_image_url | default: default_hero_url }}"
@@ -129,10 +129,10 @@
 
 {% schema %}
   {
-    "name": "Course index",
-    "description": "Course overview with modules",
-    "thumb_url": "images/theme/preview-index.png",
-    "preview_image_urls": ["images/theme/preview-index.png"],
+    "name": "t:schema.templates.index.name",
+    "description": "t:schema.templates.index.description",
+    "thumb_url": "images/theme/${lang}/index_poster.png",
+    "preview_image_urls": ["images/theme/${lang}/index_poster.png"],
     "sub_page_templates": ["channel", "channel.grid"]
   }
 {% endschema %}

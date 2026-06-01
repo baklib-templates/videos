@@ -2,18 +2,20 @@
   {
     "name": "theme_info",
     "theme_name": "videos",
-    "theme_label": "Video Course",
-    "theme_description": "Video course theme with a sidebar outline, lesson detail pages, and interview grids inspired by AI-native SaaS learning products.",
+    "theme_label": "t:theme_label",
+    "theme_description": "t:theme_description",
     "theme_version": "0.1.0",
     "theme_syntax_version": "v2",
     "theme_scope": "cms",
     "theme_author": "Baklib",
-    "theme_documentation_url": "https://help.baklib.cn/",
-    "theme_support_url": "https://help.baklib.cn/",
+    "theme_documentation_url": "https://www.github.com/baklib-templates/videos",
+    "theme_support_url": "https://www.github.com/baklib-templates/videos",
     "theme_thumb_url": "images/theme/thumb.png",
     "theme_preview_images": [
-      "images/theme/preview-index.png",
-      "images/theme/preview-page.png"
+      "images/theme/${lang}/cover.png",
+      "images/theme/${lang}/index_poster.png",
+      "images/theme/${lang}/channel.grid_poster.png",
+      "images/theme/${lang}/page_poster.png"
     ],
     "theme_languages": [
       { "name": "中文简体", "value": "zh-CN" },
@@ -115,18 +117,18 @@
     }
   },
   {
-    "name": "Site settings",
+    "name": "t:schema.settings_schema.site_settings.name",
     "settings": [
       {
         "id": "brand_name",
         "type": "text",
-        "label": "Brand name",
+        "label": "t:schema.settings_schema.site_settings.settings.brand_name.label",
         "default": "Compass"
       },
       {
         "id": "brand_slogan",
         "type": "textarea",
-        "label": "Course summary (homepage)",
+        "label": "t:schema.settings_schema.site_settings.settings.brand_slogan.label",
         "default": "A comprehensive journey that helps you navigate uncertainty and make choices aligned with your values and goals.",
         "rows": 3
       },
@@ -135,36 +137,36 @@
         "type": "image_picker",
         "ratio": "16:9",
         "width": 240,
-        "label": "Homepage hero background"
+        "label": "t:schema.settings_schema.site_settings.settings.hero_image_url.label"
       }
     ]
   },
   {
-    "name": "Custom HTML",
+    "name": "t:schema.settings_schema.custom_html.name",
     "settings": [
       {
         "id": "head_html",
         "type": "html",
-        "label": "Head HTML",
-        "info": "Injected into the <head> section, Add analytics or verification scripts here.",
+        "label": "t:schema.settings_schema.custom_html.settings.head_html.label",
+        "info": "t:schema.settings_schema.custom_html.settings.head_html.info",
         "rows": 10,
-        "placeholder": "<!-- Add analytics or verification scripts -->"
+        "placeholder": "t:schema.settings_schema.custom_html.settings.head_html.placeholder"
       },
       {
         "id": "header_menu_html",
         "type": "html",
-        "label": "Header menu HTML",
-        "info": "Rendered in the desktop top navigation, Add navigation links here.",
+        "label": "t:schema.settings_schema.custom_html.settings.header_menu_html.label",
+        "info": "t:schema.settings_schema.custom_html.settings.header_menu_html.info",
         "rows": 6,
-        "placeholder": "<a href=\"/\">Home</a>"
+        "placeholder": "t:schema.settings_schema.custom_html.settings.header_menu_html.placeholder"
       },
       {
         "id": "footer_menu_html",
         "type": "html",
-        "label": "Footer menu HTML",
-        "info": "Rendered in the footer area, Add navigation links here.",
+        "label": "t:schema.settings_schema.custom_html.settings.footer_menu_html.label",
+        "info": "t:schema.settings_schema.custom_html.settings.footer_menu_html.info",
         "rows": 6,
-        "placeholder": "<a href=\"/terms\">Terms</a>"
+        "placeholder": "t:schema.settings_schema.custom_html.settings.footer_menu_html.placeholder"
       }
     ]
   }

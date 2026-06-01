@@ -1,0 +1,91 @@
+{
+  "settings_schema": {
+    "site_settings": {
+      "name": "Site settings",
+      "settings": {
+        "brand_name": {
+          "label": "Brand name"
+        },
+        "brand_slogan": {
+          "label": "Course summary (homepage)"
+        },
+        "hero_image_url": {
+          "label": "Homepage hero background"
+        }
+      }
+    },
+    "custom_html": {
+      "name": "Custom HTML",
+      "settings": {
+        "head_html": {
+          "label": "Head HTML",
+          "info": "Injected into the <head> section. Add analytics or verification scripts here.",
+          "placeholder": "<!-- Add analytics or verification scripts -->"
+        },
+        "header_menu_html": {
+          "label": "Header menu HTML",
+          "info": "Rendered in the desktop top navigation. Add navigation links here.",
+          "placeholder": "<a href=\"/\">Home</a>"
+        },
+        "footer_menu_html": {
+          "label": "Footer menu HTML",
+          "info": "Rendered in the footer area. Add navigation links here.",
+          "placeholder": "<a href=\"/terms\">Terms</a>"
+        }
+      }
+    }
+  },
+  "templates": {
+    "index": {
+      "name": "Course index",
+      "description": "Course overview with modules"
+    },
+    "channel": {
+      "name": "Course module",
+      "description": "Lesson list for one module",
+      "settings": {
+        "description": {
+          "label": "Description"
+        }
+      }
+    },
+    "channel.grid": {
+      "name": "Grid channel",
+      "description": "Video card grid (e.g. interviews)",
+      "settings": {
+        "description": {
+          "label": "Description"
+        }
+      }
+    },
+    "page": {
+      "name": "Lesson / detail page",
+      "description": "Video + prose + optional protected section",
+      "settings": {
+        "title": {
+          "label": "Title (e.g. Interview)"
+        },
+        "description": {
+          "label": "Short description"
+        },
+        "video_asset_url": {
+          "label": "Video asset",
+          "info": "Select a video from the asset library. If not set, External video URL below will be used."
+        },
+        "external_video_url": {
+          "label": "External video URL (fallback)"
+        },
+        "thumb_image_url": {
+          "label": "Poster image",
+          "info": "Used as the video poster and list thumbnail."
+        },
+        "content": {
+          "label": "Body"
+        },
+        "protected_content": {
+          "label": "Protected content"
+        }
+      }
+    }
+  }
+}

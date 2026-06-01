@@ -1,0 +1,91 @@
+{
+  "settings_schema": {
+    "site_settings": {
+      "name": "站点设置",
+      "settings": {
+        "brand_name": {
+          "label": "品牌名称"
+        },
+        "brand_slogan": {
+          "label": "课程简介（首页）"
+        },
+        "hero_image_url": {
+          "label": "首页主视觉背景图"
+        }
+      }
+    },
+    "custom_html": {
+      "name": "自定义 HTML",
+      "settings": {
+        "head_html": {
+          "label": "Head HTML",
+          "info": "注入到页面 <head> 中，可添加统计或站点验证代码。",
+          "placeholder": "<!-- 添加统计或验证脚本 -->"
+        },
+        "header_menu_html": {
+          "label": "页头菜单 HTML",
+          "info": "显示在桌面端顶部导航，可添加导航链接。",
+          "placeholder": "<a href=\"/\">首页</a>"
+        },
+        "footer_menu_html": {
+          "label": "页脚菜单 HTML",
+          "info": "显示在页脚区域，可添加导航链接。",
+          "placeholder": "<a href=\"/terms\">服务条款</a>"
+        }
+      }
+    }
+  },
+  "templates": {
+    "index": {
+      "name": "课程首页",
+      "description": "课程概览与模块列表"
+    },
+    "channel": {
+      "name": "课程模块",
+      "description": "单个模块的课时列表",
+      "settings": {
+        "description": {
+          "label": "描述"
+        }
+      }
+    },
+    "channel.grid": {
+      "name": "网格频道",
+      "description": "视频卡片网格（如访谈列表）",
+      "settings": {
+        "description": {
+          "label": "描述"
+        }
+      }
+    },
+    "page": {
+      "name": "课时 / 详情页",
+      "description": "视频、正文与可选的会员专享区块",
+      "settings": {
+        "title": {
+          "label": "标题（如：访谈）"
+        },
+        "description": {
+          "label": "简短描述"
+        },
+        "video_asset_url": {
+          "label": "视频资源",
+          "info": "从资源库选择视频；未设置时将使用下方的外部视频链接。"
+        },
+        "external_video_url": {
+          "label": "外部视频链接（备用）"
+        },
+        "thumb_image_url": {
+          "label": "封面图",
+          "info": "用作视频封面与列表缩略图。"
+        },
+        "content": {
+          "label": "正文"
+        },
+        "protected_content": {
+          "label": "会员专享内容"
+        }
+      }
+    }
+  }
+}
