@@ -24,7 +24,7 @@
   {% render 'breadrumb', current_label: ('theme.index.overview' | t: 'Overview') %}
 {%- endcapture -%}
 
-{% render 'navbar', breadcrumbs: nav_breadcrumbs %}
+{%# render 'navbar', breadcrumbs: nav_breadcrumbs %}
 
 <main class="grow px-4 sm:px-6">
   <div class="relative mx-auto max-w-7xl">
@@ -45,8 +45,30 @@
 
     <div class="mx-auto max-w-6xl">
       <div class="relative z-10 px-4 pb-10 pt-8 lg:pt-48 lg:py-24">
-        <div class="h-8 text-base-content">{% render 'logo', svg_class: 'h-8 w-auto text-base-content' %}</div>
-        <h1 class="sr-only">{{ 'theme.index.sr_course_overview' | t: 'Course overview' }}</h1>
+        <div class="h-8 text-base-content flex items-center space-x-2">
+            {% assign fallback_logo = 'images/logo.png' | asset_url %}
+            {% assign custom_logo_url = site.settings.logo_url | presence %}
+              {% if custom_logo_url %}
+                <img
+                  src="{{ custom_logo_url }}"
+                  alt="{{ site.name }}"
+                  class="h-6 w-auto max-w-full object-contain md:h-8"
+                  loading="eager"
+                />
+              {% else %}
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-base-300 bg-base-200">
+                  <img
+                    src="{{ site.favicon_url | default: fallback_logo }}"
+                    alt=""
+                    class="h-full w-full object-cover"
+                    onerror="this.onerror=null;this.src='{{ fallback_logo }}';"
+                  />
+                </span>
+                <span class="min-w-0 truncate text-base font-semibold tracking-tight text-base-content md:text-lg">{{ site.name }}</span>
+              {% endif %}
+            
+        </div>
+        <h1 class="sr-only">{{ site.settings.brand_name }}</h1>
         <p class="mt-7 max-w-lg text-pretty text-base/7 text-base-content/70">
           {{ site.settings.brand_slogan }}
         </p>

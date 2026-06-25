@@ -21,20 +21,35 @@
 
     <div class="divide-y divide-base-300/20 rounded-xl border border-base-300/20 bg-base-100">
       {%- for lesson in lessons -%}
-        {%- assign ds = lesson.settings.duration_seconds | default: 0 | plus: 0 -%}
-        {%- capture dlab -%}{% render 'duration_label', seconds: ds %}{%- endcapture -%}
-        {%- assign vtype = 'article' -%}
-        {%- if lesson.settings.video_url != blank -%}
-          {%- assign vtype = 'video' -%}
-        {%- endif -%}
         <div class="p-4">
-          {% render 'content_link',
-            title: lesson.link_text,
-            description: lesson.settings.description,
-            href: lesson.path,
-            link_type: vtype,
-            duration_label: dlab | strip
-          %}
+          <div class="flow-root">
+            <a
+              href="{{ lesson.path }}"
+              class="group -mx-3 -my-2 flex gap-4 rounded-xl px-3 py-2 text-sm/7 hover:bg-base-content/5"
+              data-turbo-frame="main-content-frame"
+              data-turbo-action="advance"
+            >
+              {%- assign thumb = lesson.settings.thumb_image_url | presence -%}
+              {%- if thumb -%}
+                <div class="relative aspect-video w-24 shrink-0 overflow-hidden rounded-lg bg-base-200 border border-base-300/10 sm:w-32">
+                  <img src="{{ thumb }}" alt="" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <i data-lucide="circle-play" class="h-6 w-6 text-white drop-shadow-md" aria-hidden="true"></i>
+                  </div>
+                </div>
+              {%- else -%}
+                <div class="aspect-video w-24 shrink-0 flex items-center justify-center rounded-lg bg-base-200 border border-base-300/10 text-base-content/30 sm:w-32">
+                  <i data-lucide="circle-play" class="h-6 w-6" aria-hidden="true"></i>
+                </div>
+              {%- endif -%}
+              <div class="min-w-0 flex-1">
+                <span class="font-semibold text-base-content block truncate group-hover:text-primary transition-colors">{{ lesson.link_text }}</span>
+                {%- if lesson.settings.description != blank -%}
+                  <p class="mt-1 text-base-content/70 text-xs sm:text-sm line-clamp-2">{{ lesson.settings.description }}</p>
+                {%- endif -%}
+              </div>
+            </a>
+          </div>
         </div>
       {%- else -%}
         <div class="p-6 text-sm text-base-content/60">{{ 'theme.channel.empty' | t: 'No lessons yet.' }}</div>

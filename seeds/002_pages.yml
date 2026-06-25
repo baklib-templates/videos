@@ -4,13 +4,13 @@ pages:
   template_name: index
 
   children:
-    - name: "Orientation: Understanding Where You Are"
+    - name: "Orientation: How to"
       slug: orientation
       template_name: channel
       settings:
         description: "You need to know where you're starting from, before you can pretend to decide where you're going."
       children:
-        - name: "The Landscape of Choice"
+        - name: "Lesson One"
           slug: landscape-of-choice
           template_name: page
           settings:
@@ -18,13 +18,13 @@ pages:
             external_video_url: "https://assets.tailwindcss.com/templates/compass/landscape-of-choice.mp4"
             thumb_image_url: "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-01.png"
             content: "preset:lesson-body.html"
-        - name: "The Paradox of Agency"
+        - name: "Lesson Two"
           slug: paradox-of-agency
           template_name: page
           settings:
             description: "Explore whether you're living your life or just reacting to everyone else's."
             content: "preset:lesson-body.html"
-        - name: "Liberation from Regret"
+        - name: "Lesson Three"
           slug: liberation-from-regret
           template_name: page
           settings:
@@ -39,7 +39,7 @@ pages:
       settings:
         description: "Experience the sensation of choice without the burden of true responsibility."
       children:
-        - name: "Mapping the Causal Factors"
+        - name: "The Causal Factors"
           slug: mapping-causal-factors
           template_name: page
           settings:
@@ -50,7 +50,8 @@ pages:
 
     - name: Interviews
       slug: interviews
-      template_name: channel.grid
+      template_name: channel
+      template_style: grid
       settings:
         description: "Explore interviews with industry experts and thought leaders."
       children:
