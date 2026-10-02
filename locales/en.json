@@ -59,6 +59,14 @@
     "duration": {
       "hr": "hr",
       "min": "min"
+    },
+    "search": {
+      "nav": "Search",
+      "title": "Search",
+      "hint": "Find lessons and interviews.",
+      "placeholder": "Lesson or keyword",
+      "empty": "No lessons found.",
+      "prompt": "Enter a keyword to start searching."
     }
   },
   "paginate": {

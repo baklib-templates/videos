@@ -1,0 +1,43 @@
+<main class="grow bg-base-100">
+  <section class="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6">
+    <header class="mb-6">
+      <h1 class="text-2xl font-bold tracking-tight text-base-content sm:text-3xl">{{ 'theme.search.title' | t }}</h1>
+      <p class="mt-2 text-sm text-base-content/70">{{ 'theme.search.hint' | t }}</p>
+      <div class="mt-4 rounded-lg border border-base-300 bg-base-200 p-3">
+        {% form_tag 'search' %}
+          <label class="flex items-center gap-2 px-2 py-1.5">
+            <input type="search" name="{{ form.keywords_field_name }}" value="{{ search.keywords | escape_once }}" class="w-full bg-transparent text-base-content outline-none placeholder:text-base-content/50" placeholder="{{ 'theme.search.placeholder' | t }}" x-init="$nextTick(() => { $el.focus(); $el.setSelectionRange($el.value.length, $el.value.length); })" />
+          </label>
+        {% endform_tag %}
+      </div>
+    </header>
+
+    {% if search.keywords or search.tag %}
+      <div class="space-y-3">
+        {% if search.page_number == 1 %}
+          {% for link in search.extends %}
+            <article class="rounded-2xl border border-base-300 bg-base-200 p-4">
+              <a href="{{ link.url }}" class="block text-base font-semibold text-base-content hover:text-primary search-highlight-block" data-turbo-frame="main-content-frame" data-turbo-action="advance">{{ link.link_text }}</a>
+              <p class="mt-1 line-clamp-2 text-xs text-base-content/60 search-highlight-block">{{ link.url }}</p>
+            </article>
+          {% endfor %}
+        {% endif %}
+        {% paginate_tag search.pages, as: 'items' %}
+          {% for page in items %}
+            <article class="rounded-2xl border border-base-300 bg-base-200 p-4 transition hover:border-primary/50 hover:shadow-sm">
+              <h2 class="text-base font-semibold text-base-content">
+                <a href="{{ page.path }}" class="hover:text-primary search-highlight-block" data-turbo-frame="main-content-frame" data-turbo-action="advance">{{ page.highlighted_search_title }}</a>
+              </h2>
+              <p class="mt-1 line-clamp-3 text-sm text-base-content/70 search-highlight-block">{{ page.highlighted_search_content }}</p>
+            </article>
+          {% else %}
+            {% render '@shared/empty', message: 'theme.search.empty' | t %}
+          {% endfor %}
+          <div class="mt-6">{% render '@shared/paginate' %}</div>
+        {% endpaginate_tag %}
+      </div>
+    {% else %}
+      {% render '@shared/empty', message: 'theme.search.prompt' | t %}
+    {% endif %}
+  </section>
+</main>

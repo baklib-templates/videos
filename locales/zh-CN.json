@@ -59,6 +59,14 @@
     "duration": {
       "hr": "小时",
       "min": "分钟"
+    },
+    "search": {
+      "nav": "搜索",
+      "title": "搜索",
+      "hint": "查找课时和访谈。",
+      "placeholder": "课时或关键词",
+      "empty": "没有找到课时。",
+      "prompt": "输入关键词开始搜索。"
     }
   },
   "paginate": {

@@ -30,6 +30,7 @@
     </div>
   </div>
   <nav class="flex items-center gap-x-6 text-sm/6 text-base-content max-lg:hidden">
+    <a href="{{ site.search_path }}" class="inline-flex items-center gap-x-1 text-base-content/70 hover:text-primary" data-turbo-frame="main-content-frame" data-turbo-action="advance">{{ 'theme.search.nav' | t }}</a>
     {{ site.settings.header_menu_html }}
     {%- if current_user -%}
       <div class="relative" x-data="{ open: false }">
